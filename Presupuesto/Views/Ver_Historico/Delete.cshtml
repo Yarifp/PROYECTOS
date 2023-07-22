@@ -1,0 +1,113 @@
+﻿@model Presupuesto.Ver_Historico
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Ver_Historico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depto_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depto_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nuevo_Saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depto_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depto_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo_Inicial_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo_Inicial_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nuevo_Saldo_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Analista_Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Analista_Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_Solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Solicitud)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

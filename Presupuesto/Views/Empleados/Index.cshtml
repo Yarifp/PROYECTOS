@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Presupuesto.Empleados>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Primer_Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segundo_Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo_Electronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre_Completo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Departamentos.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Roles.Rol)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Primer_Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segundo_Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo_Electronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre_Completo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Departamentos.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Roles.Rol)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idEmpleado }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idEmpleado }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idEmpleado })
+        </td>
+    </tr>
+}
+
+</table>

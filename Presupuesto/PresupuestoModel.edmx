@@ -1,0 +1,1787 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MODIFICACION_PRESUPUESTOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cat_Departamentos">
+          <Key>
+            <PropertyRef Name="idDepto" />
+          </Key>
+          <Property Name="idDepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Presupuesto_autorizado" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Presupuesto_asignado" Type="decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <EntityType Name="Cat_Estado_Solicitud">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Estado_Usuario">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Partidas">
+          <Key>
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Periodo_Modificaciones">
+          <Key>
+            <PropertyRef Name="idPeriodo" />
+          </Key>
+          <Property Name="idPeriodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha_Apertura" Type="date" Nullable="false" />
+          <Property Name="Fecha_Cierre" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Roles">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Solicitudes">
+          <Key>
+            <PropertyRef Name="idTipoSolicitud" />
+          </Key>
+          <Property Name="idTipoSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Primer_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Segundo_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="idDepto" Type="int" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Historico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPeriodo" Type="int" Nullable="false" />
+          <Property Name="idSolicitud" Type="int" Nullable="false" />
+          <Property Name="idTipoSolicitud" Type="int" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+          <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+          <Property Name="idDepto_Origen" Type="int" Nullable="false" />
+          <Property Name="CodPartida_Origen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Saldo_Origen_Inicial" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Monto_Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Origen" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="idDepartamento_Destino" Type="int" Nullable="false" />
+          <Property Name="CodPartida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Saldo_Destino_Inicial" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="Monto_Solicitud2" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Destino" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="idSolicitante" Type="int" Nullable="false" />
+          <Property Name="idResponsable" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partidas_Asignadas">
+          <Key>
+            <PropertyRef Name="idAsig" />
+          </Key>
+          <Property Name="idAsig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoPartida" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="idDepartamento" Type="int" Nullable="false" />
+          <Property Name="Monto_asignado" Type="decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <EntityType Name="Solicitudes">
+          <Key>
+            <PropertyRef Name="idSolicitud" />
+          </Key>
+          <Property Name="idSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoSolicitud" Type="int" Nullable="false" />
+          <Property Name="idSolicitante" Type="int" Nullable="false" />
+          <Property Name="idPeriodo" Type="int" Nullable="false" />
+          <Property Name="idDepartamento_Origen" Type="int" Nullable="false" />
+          <Property Name="CodPartida_Origen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="idDepartamento_Destino" Type="int" Nullable="false" />
+          <Property Name="CodPartida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Monto_Solicitado" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+          <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MODIFICACION_PRESUPUESTO.dbo.Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="Nombre_Usuario" />
+            <PropertyRef Name="Contrasena" />
+            <PropertyRef Name="idDepto" />
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idEmpleado" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" />
+          <Property Name="Nombre_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Correo_electronico" Type="varchar" MaxLength="200" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="62" Nullable="false" />
+          <Property Name="idDepto" Type="int" Nullable="false" />
+          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idEmpleado" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MODIFICACION_PRESUPUESTO.dbo.Ver_Cod_Partidas_Asignadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Ver_Cod_Partidas_Asignadas">
+          <Key>
+            <PropertyRef Name="IdDepto" />
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="IdDepto" Type="int" Nullable="false" />
+          <Property Name="Departamento" Type="varchar" MaxLength="100" />
+          <Property Name="Cod" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Partida" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_asignado" Type="decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MODIFICACION_PRESUPUESTO.dbo.Ver_Historico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Ver_Historico">
+          <Key>
+            <PropertyRef Name="Periodo" />
+            <PropertyRef Name="Solicitud" />
+            <PropertyRef Name="Fecha_Solicitud" />
+            <PropertyRef Name="Fecha_Respuesta" />
+            <PropertyRef Name="Cod_Partida" />
+            <PropertyRef Name="Saldo_Inicial" />
+            <PropertyRef Name="Monto_Solicitud" />
+            <PropertyRef Name="Cod_Partida_Destino" />
+            <PropertyRef Name="Monto__Solicitud" />
+          </Key>
+          <Property Name="Periodo" Type="int" Nullable="false" />
+          <Property Name="Solicitud" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+          <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+          <Property Name="Depto_Origen" Type="varchar" MaxLength="100" />
+          <Property Name="Cod_Partida" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Partida_Origen" Type="varchar" MaxLength="100" />
+          <Property Name="Saldo_Inicial" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Monto_Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="Depto_Destino" Type="varchar" MaxLength="100" />
+          <Property Name="Cod_Partida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Partida_Destino" Type="varchar" MaxLength="100" />
+          <Property Name="Saldo_Inicial_Destino" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="Monto__Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Destino" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="Solicitante" Type="varchar" MaxLength="200" />
+          <Property Name="Analista_Responsable" Type="varchar" MaxLength="200" />
+          <Property Name="Estado_Solicitud" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'MODIFICACION_PRESUPUESTO.dbo.Ver_Partidas_Asignadas' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Ver_Partidas_Asignadas">
+          <Property Name="Departamento" Type="varchar" MaxLength="100" />
+          <Property Name="Partida" Type="varchar" MaxLength="100" />
+          <Property Name="Monto_asignado" Type="decimal" Precision="19" Scale="2" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MODIFICACION_PRESUPUESTO.dbo.Ver_Solicitudes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Ver_Solicitudes">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Periodo" />
+            <PropertyRef Name="Codigo_PartidaOrigen" />
+            <PropertyRef Name="Codigo_PartidaDestino" />
+            <PropertyRef Name="Monto" />
+            <PropertyRef Name="Fecha_Solicitud" />
+            <PropertyRef Name="Fecha_Respuesta" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" />
+          <Property Name="Solicitante" Type="varchar" MaxLength="200" />
+          <Property Name="Periodo" Type="int" Nullable="false" />
+          <Property Name="Depto_Origen" Type="varchar" MaxLength="100" />
+          <Property Name="Codigo_PartidaOrigen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Partida_Origen" Type="varchar" MaxLength="100" />
+          <Property Name="Depto_Destino" Type="varchar" MaxLength="100" />
+          <Property Name="Codigo_PartidaDestino" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Partida_Destino" Type="varchar" MaxLength="100" />
+          <Property Name="Monto" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+          <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+          <Property Name="Estado_Solicitud" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Empleados__idDep__398D8EEE">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__idRol__38996AB5">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Historico__CodPa__534D60F1' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Historico__CodPa__534D60F1" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Historico__CodPa__5535A963' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Historico__CodPa__5535A963" />-->
+        <Association Name="FK__Historico__idDep__52593CB8">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idDepto_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idDep__5441852A">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idDepartamento_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idEst__5812160E">
+          <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Solicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idPer__4F7CD00D">
+          <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Periodo_Modificaciones">
+              <PropertyRef Name="idPeriodo" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idRes__571DF1D5">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idSol__5070F446">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idSol__5629CD9C">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idTip__5165187F">
+          <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Partidas___Codig__4222D4EF' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Partidas___Codig__4222D4EF" />-->
+        <Association Name="FK__Partidas___idDep__4316F928">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Partidas_Asignadas" Type="Self.Partidas_Asignadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Partidas_Asignadas">
+              <PropertyRef Name="idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Solicitud__CodPa__49C3F6B7' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Solicitud__CodPa__49C3F6B7" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Solicitud__CodPa__4BAC3F29' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Solicitud__CodPa__4BAC3F29" />-->
+        <Association Name="FK__Solicitud__idDep__48CFD27E">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idDepartamento_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idDep__4AB81AF0">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idDepartamento_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idEst__4CA06362">
+          <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Solicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idPer__47DBAE45">
+          <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Periodo_Modificaciones">
+              <PropertyRef Name="idPeriodo" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idSol__46E78A0C">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idTip__45F365D3">
+          <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idDept__3F466844">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idEmpl__3D5E1FD2">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idEsta__3E52440B">
+          <End Role="Cat_Estado_Usuario" Type="Self.Cat_Estado_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Usuario">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idRol__3C69FB99">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Act_Roles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpleado" Type="int" Mode="In" />
+          <Parameter Name="IdRol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Aprobar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSolicitud" Type="int" Mode="In" />
+          <Parameter Name="idResponsable" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Asig_Presupuesto_Partida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDepto" Type="int" Mode="In" />
+          <Parameter Name="Cod_Partida" Type="varchar" Mode="In" />
+          <Parameter Name="Monto_asignado" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="Bloquer_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Definir_Periodo_Modificaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fecha_Apertura" Type="date" Mode="In" />
+          <Parameter Name="Fecha_Cierre" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Desbloquer_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Ingresar_Categoria_Solicitudes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Categoria" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Departamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Presupuesto_autorizado" Type="decimal" Mode="In" />
+          <Parameter Name="Presupuesto_asignado" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Empleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+          <Parameter Name="idDepto" Type="int" Mode="In" />
+          <Parameter Name="idRol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Estado_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Estado_Usuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Partidas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Roles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Rol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ingresar_Tipo_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tipo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Rechazar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSolicitud" Type="int" Mode="In" />
+          <Parameter Name="idResponsable" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Solicitar_Modificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTipo" Type="int" Mode="In" />
+          <Parameter Name="idSolicitante" Type="int" Mode="In" />
+          <Parameter Name="idPeriodo" Type="int" Mode="In" />
+          <Parameter Name="idDepto_Ori" Type="int" Mode="In" />
+          <Parameter Name="Cod_Partida_Ori" Type="varchar" Mode="In" />
+          <Parameter Name="idDepto_Dest" Type="int" Mode="In" />
+          <Parameter Name="Cod_Partida_Dest" Type="varchar" Mode="In" />
+          <Parameter Name="Monto_solicitado" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="User_Pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="len" Type="int" Mode="In" />
+          <Parameter Name="min" Type="tinyint" Mode="In" />
+          <Parameter Name="range" Type="tinyint" Mode="In" />
+          <Parameter Name="exclude" Type="varchar" Mode="In" />
+          <Parameter Name="output" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="MODIFICACION_PRESUPUESTOModelStoreContainer">
+          <EntitySet Name="Cat_Departamentos" EntityType="Self.Cat_Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Estado_Solicitud" EntityType="Self.Cat_Estado_Solicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Estado_Usuario" EntityType="Self.Cat_Estado_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Partidas" EntityType="Self.Cat_Partidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Periodo_Modificaciones" EntityType="Self.Cat_Periodo_Modificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Roles" EntityType="Self.Cat_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Solicitudes" EntityType="Self.Cat_Solicitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historico" EntityType="Self.Historico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partidas_Asignadas" EntityType="Self.Partidas_Asignadas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Usuarios].[idUsuario] AS [idUsuario], 
+    [Usuarios].[Usuario] AS [Usuario], 
+    [Usuarios].[Nombre_Usuario] AS [Nombre_Usuario], 
+    [Usuarios].[Correo_electronico] AS [Correo_electronico], 
+    [Usuarios].[Contrasena] AS [Contrasena], 
+    [Usuarios].[idDepto] AS [idDepto], 
+    [Usuarios].[idRol] AS [idRol], 
+    [Usuarios].[idEmpleado] AS [idEmpleado], 
+    [Usuarios].[idEstado] AS [idEstado]
+    FROM [dbo].[Usuarios] AS [Usuarios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ver_Cod_Partidas_Asignadas" EntityType="Self.Ver_Cod_Partidas_Asignadas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ver_Cod_Partidas_Asignadas].[IdDepto] AS [IdDepto], 
+    [Ver_Cod_Partidas_Asignadas].[Departamento] AS [Departamento], 
+    [Ver_Cod_Partidas_Asignadas].[Cod] AS [Cod], 
+    [Ver_Cod_Partidas_Asignadas].[Partida] AS [Partida], 
+    [Ver_Cod_Partidas_Asignadas].[Monto_asignado] AS [Monto_asignado]
+    FROM [dbo].[Ver_Cod_Partidas_Asignadas] AS [Ver_Cod_Partidas_Asignadas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ver_Historico" EntityType="Self.Ver_Historico" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ver_Historico].[Periodo] AS [Periodo], 
+    [Ver_Historico].[Solicitud] AS [Solicitud], 
+    [Ver_Historico].[Tipo] AS [Tipo], 
+    [Ver_Historico].[Fecha_Solicitud] AS [Fecha_Solicitud], 
+    [Ver_Historico].[Fecha_Respuesta] AS [Fecha_Respuesta], 
+    [Ver_Historico].[Depto_Origen] AS [Depto_Origen], 
+    [Ver_Historico].[Cod_Partida] AS [Cod_Partida], 
+    [Ver_Historico].[Partida_Origen] AS [Partida_Origen], 
+    [Ver_Historico].[Saldo_Inicial] AS [Saldo_Inicial], 
+    [Ver_Historico].[Monto_Solicitud] AS [Monto_Solicitud], 
+    [Ver_Historico].[Nuevo_Saldo] AS [Nuevo_Saldo], 
+    [Ver_Historico].[Depto_Destino] AS [Depto_Destino], 
+    [Ver_Historico].[Cod_Partida_Destino] AS [Cod_Partida_Destino], 
+    [Ver_Historico].[Partida_Destino] AS [Partida_Destino], 
+    [Ver_Historico].[Saldo_Inicial_Destino] AS [Saldo_Inicial_Destino], 
+    [Ver_Historico].[Monto__Solicitud] AS [Monto__Solicitud], 
+    [Ver_Historico].[Nuevo_Saldo_Destino] AS [Nuevo_Saldo_Destino], 
+    [Ver_Historico].[Solicitante] AS [Solicitante], 
+    [Ver_Historico].[Analista_Responsable] AS [Analista_Responsable], 
+    [Ver_Historico].[Estado_Solicitud] AS [Estado_Solicitud]
+    FROM [dbo].[Ver_Historico] AS [Ver_Historico]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Ver_Solicitudes" EntityType="Self.Ver_Solicitudes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ver_Solicitudes].[ID] AS [ID], 
+    [Ver_Solicitudes].[Tipo] AS [Tipo], 
+    [Ver_Solicitudes].[Solicitante] AS [Solicitante], 
+    [Ver_Solicitudes].[Periodo] AS [Periodo], 
+    [Ver_Solicitudes].[Depto_Origen] AS [Depto_Origen], 
+    [Ver_Solicitudes].[Codigo_PartidaOrigen] AS [Codigo_PartidaOrigen], 
+    [Ver_Solicitudes].[Partida_Origen] AS [Partida_Origen], 
+    [Ver_Solicitudes].[Depto_Destino] AS [Depto_Destino], 
+    [Ver_Solicitudes].[Codigo_PartidaDestino] AS [Codigo_PartidaDestino], 
+    [Ver_Solicitudes].[Partida_Destino] AS [Partida_Destino], 
+    [Ver_Solicitudes].[Monto] AS [Monto], 
+    [Ver_Solicitudes].[Fecha_Solicitud] AS [Fecha_Solicitud], 
+    [Ver_Solicitudes].[Fecha_Respuesta] AS [Fecha_Respuesta], 
+    [Ver_Solicitudes].[Estado_Solicitud] AS [Estado_Solicitud]
+    FROM [dbo].[Ver_Solicitudes] AS [Ver_Solicitudes]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Empleados__idDep__398D8EEE" Association="Self.FK__Empleados__idDep__398D8EEE">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__idRol__38996AB5" Association="Self.FK__Empleados__idRol__38996AB5">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idDep__52593CB8" Association="Self.FK__Historico__idDep__52593CB8">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idDep__5441852A" Association="Self.FK__Historico__idDep__5441852A">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idEst__5812160E" Association="Self.FK__Historico__idEst__5812160E">
+            <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idPer__4F7CD00D" Association="Self.FK__Historico__idPer__4F7CD00D">
+            <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idRes__571DF1D5" Association="Self.FK__Historico__idRes__571DF1D5">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idSol__5070F446" Association="Self.FK__Historico__idSol__5070F446">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idSol__5629CD9C" Association="Self.FK__Historico__idSol__5629CD9C">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idTip__5165187F" Association="Self.FK__Historico__idTip__5165187F">
+            <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partidas___idDep__4316F928" Association="Self.FK__Partidas___idDep__4316F928">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Partidas_Asignadas" EntitySet="Partidas_Asignadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idDep__48CFD27E" Association="Self.FK__Solicitud__idDep__48CFD27E">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idDep__4AB81AF0" Association="Self.FK__Solicitud__idDep__4AB81AF0">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idEst__4CA06362" Association="Self.FK__Solicitud__idEst__4CA06362">
+            <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idPer__47DBAE45" Association="Self.FK__Solicitud__idPer__47DBAE45">
+            <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idSol__46E78A0C" Association="Self.FK__Solicitud__idSol__46E78A0C">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idTip__45F365D3" Association="Self.FK__Solicitud__idTip__45F365D3">
+            <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idDept__3F466844" Association="Self.FK__Usuarios__idDept__3F466844">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idEmpl__3D5E1FD2" Association="Self.FK__Usuarios__idEmpl__3D5E1FD2">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idEsta__3E52440B" Association="Self.FK__Usuarios__idEsta__3E52440B">
+            <End Role="Cat_Estado_Usuario" EntitySet="Cat_Estado_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idRol__3C69FB99" Association="Self.FK__Usuarios__idRol__3C69FB99">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MODIFICACION_PRESUPUESTOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cat_Departamentos">
+          <Key>
+            <PropertyRef Name="idDepto" />
+          </Key>
+          <Property Name="idDepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Presupuesto_autorizado" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Presupuesto_asignado" Type="Decimal" Precision="19" Scale="2" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__idDep__398D8EEE" FromRole="Cat_Departamentos" ToRole="Empleados" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idDep__52593CB8" FromRole="Cat_Departamentos" ToRole="Historico" />
+          <NavigationProperty Name="Historico1" Relationship="Self.FK__Historico__idDep__5441852A" FromRole="Cat_Departamentos" ToRole="Historico" />
+          <NavigationProperty Name="Partidas_Asignadas" Relationship="Self.FK__Partidas___idDep__4316F928" FromRole="Cat_Departamentos" ToRole="Partidas_Asignadas" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Solicitud__idDep__48CFD27E" FromRole="Cat_Departamentos" ToRole="Solicitudes" />
+          <NavigationProperty Name="Solicitudes1" Relationship="Self.FK__Solicitud__idDep__4AB81AF0" FromRole="Cat_Departamentos" ToRole="Solicitudes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__idDept__3F466844" FromRole="Cat_Departamentos" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Cat_Estado_Solicitud">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idEst__5812160E" FromRole="Cat_Estado_Solicitud" ToRole="Historico" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Solicitud__idEst__4CA06362" FromRole="Cat_Estado_Solicitud" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Cat_Estado_Usuario">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__idEsta__3E52440B" FromRole="Cat_Estado_Usuario" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Cat_Partidas">
+          <Key>
+            <PropertyRef Name="idPartida" />
+          </Key>
+          <Property Name="idPartida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Periodo_Modificaciones">
+          <Key>
+            <PropertyRef Name="idPeriodo" />
+          </Key>
+          <Property Name="idPeriodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha_Apertura" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Cierre" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idPer__4F7CD00D" FromRole="Cat_Periodo_Modificaciones" ToRole="Historico" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Solicitud__idPer__47DBAE45" FromRole="Cat_Periodo_Modificaciones" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Cat_Roles">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__idRol__38996AB5" FromRole="Cat_Roles" ToRole="Empleados" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__idRol__3C69FB99" FromRole="Cat_Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Cat_Solicitudes">
+          <Key>
+            <PropertyRef Name="idTipoSolicitud" />
+          </Key>
+          <Property Name="idTipoSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idTip__5165187F" FromRole="Cat_Solicitudes" ToRole="Historico" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Solicitud__idTip__45F365D3" FromRole="Cat_Solicitudes" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Primer_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Segundo_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idDepto" Type="Int32" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cat_Departamentos" Relationship="Self.FK__Empleados__idDep__398D8EEE" FromRole="Empleados" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Roles" Relationship="Self.FK__Empleados__idRol__38996AB5" FromRole="Empleados" ToRole="Cat_Roles" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idRes__571DF1D5" FromRole="Empleados" ToRole="Historico" />
+          <NavigationProperty Name="Historico1" Relationship="Self.FK__Historico__idSol__5629CD9C" FromRole="Empleados" ToRole="Historico" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Solicitud__idSol__46E78A0C" FromRole="Empleados" ToRole="Solicitudes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__idEmpl__3D5E1FD2" FromRole="Empleados" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Historico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="idSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="idTipoSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Respuesta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idDepto_Origen" Type="Int32" Nullable="false" />
+          <Property Name="CodPartida_Origen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Saldo_Origen_Inicial" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Monto_Solicitud" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Origen" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="idDepartamento_Destino" Type="Int32" Nullable="false" />
+          <Property Name="CodPartida_Destino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Saldo_Destino_Inicial" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="Monto_Solicitud2" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Destino" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="idSolicitante" Type="Int32" Nullable="false" />
+          <Property Name="idResponsable" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cat_Departamentos" Relationship="Self.FK__Historico__idDep__52593CB8" FromRole="Historico" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Departamentos1" Relationship="Self.FK__Historico__idDep__5441852A" FromRole="Historico" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Estado_Solicitud" Relationship="Self.FK__Historico__idEst__5812160E" FromRole="Historico" ToRole="Cat_Estado_Solicitud" />
+          <NavigationProperty Name="Cat_Periodo_Modificaciones" Relationship="Self.FK__Historico__idPer__4F7CD00D" FromRole="Historico" ToRole="Cat_Periodo_Modificaciones" />
+          <NavigationProperty Name="Cat_Solicitudes" Relationship="Self.FK__Historico__idTip__5165187F" FromRole="Historico" ToRole="Cat_Solicitudes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Historico__idRes__571DF1D5" FromRole="Historico" ToRole="Empleados" />
+          <NavigationProperty Name="Empleados1" Relationship="Self.FK__Historico__idSol__5629CD9C" FromRole="Historico" ToRole="Empleados" />
+          <NavigationProperty Name="Solicitudes" Relationship="Self.FK__Historico__idSol__5070F446" FromRole="Historico" ToRole="Solicitudes" />
+        </EntityType>
+        <EntityType Name="Partidas_Asignadas">
+          <Key>
+            <PropertyRef Name="idAsig" />
+          </Key>
+          <Property Name="idAsig" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoPartida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Monto_asignado" Type="Decimal" Precision="19" Scale="2" />
+          <NavigationProperty Name="Cat_Departamentos" Relationship="Self.FK__Partidas___idDep__4316F928" FromRole="Partidas_Asignadas" ToRole="Cat_Departamentos" />
+        </EntityType>
+        <EntityType Name="Solicitudes">
+          <Key>
+            <PropertyRef Name="idSolicitud" />
+          </Key>
+          <Property Name="idSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="idSolicitante" Type="Int32" Nullable="false" />
+          <Property Name="idPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="idDepartamento_Origen" Type="Int32" Nullable="false" />
+          <Property Name="CodPartida_Origen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idDepartamento_Destino" Type="Int32" Nullable="false" />
+          <Property Name="CodPartida_Destino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monto_Solicitado" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Respuesta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cat_Departamentos" Relationship="Self.FK__Solicitud__idDep__48CFD27E" FromRole="Solicitudes" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Departamentos1" Relationship="Self.FK__Solicitud__idDep__4AB81AF0" FromRole="Solicitudes" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Estado_Solicitud" Relationship="Self.FK__Solicitud__idEst__4CA06362" FromRole="Solicitudes" ToRole="Cat_Estado_Solicitud" />
+          <NavigationProperty Name="Cat_Periodo_Modificaciones" Relationship="Self.FK__Solicitud__idPer__47DBAE45" FromRole="Solicitudes" ToRole="Cat_Periodo_Modificaciones" />
+          <NavigationProperty Name="Cat_Solicitudes" Relationship="Self.FK__Solicitud__idTip__45F365D3" FromRole="Solicitudes" ToRole="Cat_Solicitudes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Solicitud__idSol__46E78A0C" FromRole="Solicitudes" ToRole="Empleados" />
+          <NavigationProperty Name="Historico" Relationship="Self.FK__Historico__idSol__5070F446" FromRole="Solicitudes" ToRole="Historico" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="Nombre_Usuario" />
+            <PropertyRef Name="Contrasena" />
+            <PropertyRef Name="idDepto" />
+            <PropertyRef Name="idRol" />
+            <PropertyRef Name="idEmpleado" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo_electronico" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idDepto" Type="Int32" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cat_Departamentos" Relationship="Self.FK__Usuarios__idDept__3F466844" FromRole="Usuarios" ToRole="Cat_Departamentos" />
+          <NavigationProperty Name="Cat_Estado_Usuario" Relationship="Self.FK__Usuarios__idEsta__3E52440B" FromRole="Usuarios" ToRole="Cat_Estado_Usuario" />
+          <NavigationProperty Name="Cat_Roles" Relationship="Self.FK__Usuarios__idRol__3C69FB99" FromRole="Usuarios" ToRole="Cat_Roles" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Usuarios__idEmpl__3D5E1FD2" FromRole="Usuarios" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Ver_Cod_Partidas_Asignadas">
+          <Key>
+            <PropertyRef Name="IdDepto" />
+            <PropertyRef Name="Cod" />
+          </Key>
+          <Property Name="IdDepto" Type="Int32" Nullable="false" />
+          <Property Name="Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partida" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto_asignado" Type="Decimal" Precision="19" Scale="2" />
+        </EntityType>
+        <EntityType Name="Ver_Historico">
+          <Key>
+            <PropertyRef Name="Periodo" />
+            <PropertyRef Name="Solicitud" />
+            <PropertyRef Name="Fecha_Solicitud" />
+            <PropertyRef Name="Fecha_Respuesta" />
+            <PropertyRef Name="Cod_Partida" />
+            <PropertyRef Name="Saldo_Inicial" />
+            <PropertyRef Name="Monto_Solicitud" />
+            <PropertyRef Name="Cod_Partida_Destino" />
+            <PropertyRef Name="Monto__Solicitud" />
+          </Key>
+          <Property Name="Periodo" Type="Int32" Nullable="false" />
+          <Property Name="Solicitud" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Respuesta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Depto_Origen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Partida" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partida_Origen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo_Inicial" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Monto_Solicitud" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="Depto_Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Partida_Destino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partida_Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo_Inicial_Destino" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="Monto__Solicitud" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Nuevo_Saldo_Destino" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="Solicitante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Analista_Responsable" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado_Solicitud" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Ver_Solicitudes">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Periodo" />
+            <PropertyRef Name="Codigo_PartidaOrigen" />
+            <PropertyRef Name="Codigo_PartidaDestino" />
+            <PropertyRef Name="Monto" />
+            <PropertyRef Name="Fecha_Solicitud" />
+            <PropertyRef Name="Fecha_Respuesta" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Solicitante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Periodo" Type="Int32" Nullable="false" />
+          <Property Name="Depto_Origen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo_PartidaOrigen" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partida_Origen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Depto_Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo_PartidaDestino" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partida_Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Respuesta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado_Solicitud" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Empleados__idDep__398D8EEE">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idDep__52593CB8">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idDepto_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idDep__5441852A">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idDepartamento_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Partidas___idDep__4316F928">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Partidas_Asignadas" Type="Self.Partidas_Asignadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Partidas_Asignadas">
+              <PropertyRef Name="idDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idDep__48CFD27E">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idDepartamento_Origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idDep__4AB81AF0">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idDepartamento_Destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idDept__3F466844">
+          <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Departamentos">
+              <PropertyRef Name="idDepto" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idEst__5812160E">
+          <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Solicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idEst__4CA06362">
+          <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Solicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idEsta__3E52440B">
+          <End Role="Cat_Estado_Usuario" Type="Self.Cat_Estado_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Estado_Usuario">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idPer__4F7CD00D">
+          <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Periodo_Modificaciones">
+              <PropertyRef Name="idPeriodo" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idPer__47DBAE45">
+          <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Periodo_Modificaciones">
+              <PropertyRef Name="idPeriodo" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__idRol__38996AB5">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idRol__3C69FB99">
+          <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Roles">
+              <PropertyRef Name="idRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idTip__5165187F">
+          <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idTip__45F365D3">
+          <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idTipoSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idRes__571DF1D5">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idSol__5629CD9C">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Solicitud__idSol__46E78A0C">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Solicitudes">
+              <PropertyRef Name="idSolicitante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__idEmpl__3D5E1FD2">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="idEmpleado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historico__idSol__5070F446">
+          <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+          <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitudes">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="Historico">
+              <PropertyRef Name="idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MODIFICACION_PRESUPUESTOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cat_Departamentos" EntityType="Self.Cat_Departamentos" />
+          <EntitySet Name="Cat_Estado_Solicitud" EntityType="Self.Cat_Estado_Solicitud" />
+          <EntitySet Name="Cat_Estado_Usuario" EntityType="Self.Cat_Estado_Usuario" />
+          <EntitySet Name="Cat_Partidas" EntityType="Self.Cat_Partidas" />
+          <EntitySet Name="Cat_Periodo_Modificaciones" EntityType="Self.Cat_Periodo_Modificaciones" />
+          <EntitySet Name="Cat_Roles" EntityType="Self.Cat_Roles" />
+          <EntitySet Name="Cat_Solicitudes" EntityType="Self.Cat_Solicitudes" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Historico" EntityType="Self.Historico" />
+          <EntitySet Name="Partidas_Asignadas" EntityType="Self.Partidas_Asignadas" />
+          <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Ver_Cod_Partidas_Asignadas" EntityType="Self.Ver_Cod_Partidas_Asignadas" />
+          <EntitySet Name="Ver_Historico" EntityType="Self.Ver_Historico" />
+          <EntitySet Name="Ver_Solicitudes" EntityType="Self.Ver_Solicitudes" />
+          <AssociationSet Name="FK__Empleados__idDep__398D8EEE" Association="Self.FK__Empleados__idDep__398D8EEE">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idDep__52593CB8" Association="Self.FK__Historico__idDep__52593CB8">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idDep__5441852A" Association="Self.FK__Historico__idDep__5441852A">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Partidas___idDep__4316F928" Association="Self.FK__Partidas___idDep__4316F928">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Partidas_Asignadas" EntitySet="Partidas_Asignadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idDep__48CFD27E" Association="Self.FK__Solicitud__idDep__48CFD27E">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idDep__4AB81AF0" Association="Self.FK__Solicitud__idDep__4AB81AF0">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idDept__3F466844" Association="Self.FK__Usuarios__idDept__3F466844">
+            <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idEst__5812160E" Association="Self.FK__Historico__idEst__5812160E">
+            <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idEst__4CA06362" Association="Self.FK__Solicitud__idEst__4CA06362">
+            <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idEsta__3E52440B" Association="Self.FK__Usuarios__idEsta__3E52440B">
+            <End Role="Cat_Estado_Usuario" EntitySet="Cat_Estado_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idPer__4F7CD00D" Association="Self.FK__Historico__idPer__4F7CD00D">
+            <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idPer__47DBAE45" Association="Self.FK__Solicitud__idPer__47DBAE45">
+            <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__idRol__38996AB5" Association="Self.FK__Empleados__idRol__38996AB5">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idRol__3C69FB99" Association="Self.FK__Usuarios__idRol__3C69FB99">
+            <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idTip__5165187F" Association="Self.FK__Historico__idTip__5165187F">
+            <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idTip__45F365D3" Association="Self.FK__Solicitud__idTip__45F365D3">
+            <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idRes__571DF1D5" Association="Self.FK__Historico__idRes__571DF1D5">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idSol__5629CD9C" Association="Self.FK__Historico__idSol__5629CD9C">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Solicitud__idSol__46E78A0C" Association="Self.FK__Solicitud__idSol__46E78A0C">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__idEmpl__3D5E1FD2" Association="Self.FK__Usuarios__idEmpl__3D5E1FD2">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historico__idSol__5070F446" Association="Self.FK__Historico__idSol__5070F446">
+            <End Role="Solicitudes" EntitySet="Solicitudes" />
+            <End Role="Historico" EntitySet="Historico" />
+          </AssociationSet>
+          <FunctionImport Name="Act_Roles">
+            <Parameter Name="IdEmpleado" Mode="In" Type="Int32" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Aprobar_Solicitud">
+            <Parameter Name="idSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="idResponsable" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Asig_Presupuesto_Partida">
+            <Parameter Name="idDepto" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_Partida" Mode="In" Type="String" />
+            <Parameter Name="Monto_asignado" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="Bloquer_Usuario">
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Definir_Periodo_Modificaciones">
+            <Parameter Name="Fecha_Apertura" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_Cierre" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Desbloquer_Usuario">
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Categoria_Solicitudes">
+            <Parameter Name="Categoria" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Departamentos">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Presupuesto_autorizado" Mode="In" Type="Decimal" />
+            <Parameter Name="Presupuesto_asignado" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Empleados">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Primer_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Segundo_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="idDepto" Mode="In" Type="Int32" />
+            <Parameter Name="idRol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Estado_Solicitud">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Estado_Usuarios">
+            <Parameter Name="Estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Partidas">
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Roles">
+            <Parameter Name="Rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ingresar_Tipo_Solicitud">
+            <Parameter Name="Tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rechazar_Solicitud">
+            <Parameter Name="idSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="idResponsable" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Solicitar_Modificacion">
+            <Parameter Name="idTipo" Mode="In" Type="Int32" />
+            <Parameter Name="idSolicitante" Mode="In" Type="Int32" />
+            <Parameter Name="idPeriodo" Mode="In" Type="Int32" />
+            <Parameter Name="idDepto_Ori" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_Partida_Ori" Mode="In" Type="String" />
+            <Parameter Name="idDepto_Dest" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_Partida_Dest" Mode="In" Type="String" />
+            <Parameter Name="Monto_solicitado" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MODIFICACION_PRESUPUESTOModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MODIFICACION_PRESUPUESTOModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="User_Pass">
+            <Parameter Name="len" Mode="In" Type="Int32" />
+            <Parameter Name="min" Mode="In" Type="Byte" />
+            <Parameter Name="range" Mode="In" Type="Byte" />
+            <Parameter Name="exclude" Mode="In" Type="String" />
+            <Parameter Name="output" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MODIFICACION_PRESUPUESTOModelStoreContainer" CdmEntityContainer="MODIFICACION_PRESUPUESTOEntities">
+          <EntitySetMapping Name="Cat_Departamentos">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Departamentos">
+              <MappingFragment StoreEntitySet="Cat_Departamentos">
+                <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Presupuesto_autorizado" ColumnName="Presupuesto_autorizado" />
+                <ScalarProperty Name="Presupuesto_asignado" ColumnName="Presupuesto_asignado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Estado_Solicitud">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Estado_Solicitud">
+              <MappingFragment StoreEntitySet="Cat_Estado_Solicitud">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Estado_Usuario">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Estado_Usuario">
+              <MappingFragment StoreEntitySet="Cat_Estado_Usuario">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Partidas">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Partidas">
+              <MappingFragment StoreEntitySet="Cat_Partidas">
+                <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Periodo_Modificaciones">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Periodo_Modificaciones">
+              <MappingFragment StoreEntitySet="Cat_Periodo_Modificaciones">
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="Fecha_Apertura" ColumnName="Fecha_Apertura" />
+                <ScalarProperty Name="Fecha_Cierre" ColumnName="Fecha_Cierre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Roles">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Roles">
+              <MappingFragment StoreEntitySet="Cat_Roles">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Solicitudes">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Solicitudes">
+              <MappingFragment StoreEntitySet="Cat_Solicitudes">
+                <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historico">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Historico">
+              <MappingFragment StoreEntitySet="Historico">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+                <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+                <ScalarProperty Name="idDepto_Origen" ColumnName="idDepto_Origen" />
+                <ScalarProperty Name="CodPartida_Origen" ColumnName="CodPartida_Origen" />
+                <ScalarProperty Name="Saldo_Origen_Inicial" ColumnName="Saldo_Origen_Inicial" />
+                <ScalarProperty Name="Monto_Solicitud" ColumnName="Monto_Solicitud" />
+                <ScalarProperty Name="Nuevo_Saldo_Origen" ColumnName="Nuevo_Saldo_Origen" />
+                <ScalarProperty Name="idDepartamento_Destino" ColumnName="idDepartamento_Destino" />
+                <ScalarProperty Name="CodPartida_Destino" ColumnName="CodPartida_Destino" />
+                <ScalarProperty Name="Saldo_Destino_Inicial" ColumnName="Saldo_Destino_Inicial" />
+                <ScalarProperty Name="Monto_Solicitud2" ColumnName="Monto_Solicitud2" />
+                <ScalarProperty Name="Nuevo_Saldo_Destino" ColumnName="Nuevo_Saldo_Destino" />
+                <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+                <ScalarProperty Name="idResponsable" ColumnName="idResponsable" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partidas_Asignadas">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Partidas_Asignadas">
+              <MappingFragment StoreEntitySet="Partidas_Asignadas">
+                <ScalarProperty Name="idAsig" ColumnName="idAsig" />
+                <ScalarProperty Name="CodigoPartida" ColumnName="CodigoPartida" />
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="Monto_asignado" ColumnName="Monto_asignado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitudes">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Solicitudes">
+              <MappingFragment StoreEntitySet="Solicitudes">
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+                <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+                <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+                <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+                <ScalarProperty Name="idDepartamento_Origen" ColumnName="idDepartamento_Origen" />
+                <ScalarProperty Name="CodPartida_Origen" ColumnName="CodPartida_Origen" />
+                <ScalarProperty Name="idDepartamento_Destino" ColumnName="idDepartamento_Destino" />
+                <ScalarProperty Name="CodPartida_Destino" ColumnName="CodPartida_Destino" />
+                <ScalarProperty Name="Monto_Solicitado" ColumnName="Monto_Solicitado" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Correo_electronico" ColumnName="Correo_electronico" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ver_Cod_Partidas_Asignadas">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Cod_Partidas_Asignadas">
+              <MappingFragment StoreEntitySet="Ver_Cod_Partidas_Asignadas">
+                <ScalarProperty Name="IdDepto" ColumnName="IdDepto" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Cod" ColumnName="Cod" />
+                <ScalarProperty Name="Partida" ColumnName="Partida" />
+                <ScalarProperty Name="Monto_asignado" ColumnName="Monto_asignado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ver_Historico">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Historico">
+              <MappingFragment StoreEntitySet="Ver_Historico">
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Solicitud" ColumnName="Solicitud" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+                <ScalarProperty Name="Depto_Origen" ColumnName="Depto_Origen" />
+                <ScalarProperty Name="Cod_Partida" ColumnName="Cod_Partida" />
+                <ScalarProperty Name="Partida_Origen" ColumnName="Partida_Origen" />
+                <ScalarProperty Name="Saldo_Inicial" ColumnName="Saldo_Inicial" />
+                <ScalarProperty Name="Monto_Solicitud" ColumnName="Monto_Solicitud" />
+                <ScalarProperty Name="Nuevo_Saldo" ColumnName="Nuevo_Saldo" />
+                <ScalarProperty Name="Depto_Destino" ColumnName="Depto_Destino" />
+                <ScalarProperty Name="Cod_Partida_Destino" ColumnName="Cod_Partida_Destino" />
+                <ScalarProperty Name="Partida_Destino" ColumnName="Partida_Destino" />
+                <ScalarProperty Name="Saldo_Inicial_Destino" ColumnName="Saldo_Inicial_Destino" />
+                <ScalarProperty Name="Monto__Solicitud" ColumnName="Monto__Solicitud" />
+                <ScalarProperty Name="Nuevo_Saldo_Destino" ColumnName="Nuevo_Saldo_Destino" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Analista_Responsable" ColumnName="Analista_Responsable" />
+                <ScalarProperty Name="Estado_Solicitud" ColumnName="Estado_Solicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ver_Solicitudes">
+            <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Solicitudes">
+              <MappingFragment StoreEntitySet="Ver_Solicitudes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Depto_Origen" ColumnName="Depto_Origen" />
+                <ScalarProperty Name="Codigo_PartidaOrigen" ColumnName="Codigo_PartidaOrigen" />
+                <ScalarProperty Name="Partida_Origen" ColumnName="Partida_Origen" />
+                <ScalarProperty Name="Depto_Destino" ColumnName="Depto_Destino" />
+                <ScalarProperty Name="Codigo_PartidaDestino" ColumnName="Codigo_PartidaDestino" />
+                <ScalarProperty Name="Partida_Destino" ColumnName="Partida_Destino" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+                <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+                <ScalarProperty Name="Estado_Solicitud" ColumnName="Estado_Solicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Act_Roles" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Act_Roles" />
+          <FunctionImportMapping FunctionImportName="Aprobar_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Aprobar_Solicitud" />
+          <FunctionImportMapping FunctionImportName="Asig_Presupuesto_Partida" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Asig_Presupuesto_Partida" />
+          <FunctionImportMapping FunctionImportName="Bloquer_Usuario" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Bloquer_Usuario" />
+          <FunctionImportMapping FunctionImportName="Definir_Periodo_Modificaciones" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Definir_Periodo_Modificaciones" />
+          <FunctionImportMapping FunctionImportName="Desbloquer_Usuario" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Desbloquer_Usuario" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Categoria_Solicitudes" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Categoria_Solicitudes" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Departamentos" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Departamentos" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Empleados" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Empleados" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Estado_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Estado_Solicitud" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Estado_Usuarios" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Estado_Usuarios" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Partidas" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Partidas" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Roles" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Roles" />
+          <FunctionImportMapping FunctionImportName="Ingresar_Tipo_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Tipo_Solicitud" />
+          <FunctionImportMapping FunctionImportName="Rechazar_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Rechazar_Solicitud" />
+          <FunctionImportMapping FunctionImportName="Solicitar_Modificacion" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Solicitar_Modificacion" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="User_Pass" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.User_Pass" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,107 @@
+﻿@model Presupuesto.Solicitudes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Solicitudes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodPartida_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodPartida_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodPartida_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodPartida_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Monto_Solicitado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Monto_Solicitado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Solicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Respuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Respuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cat_Departamentos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cat_Departamentos.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cat_Departamentos1.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cat_Departamentos1.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cat_Estado_Solicitud.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cat_Estado_Solicitud.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cat_Periodo_Modificaciones.idPeriodo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cat_Periodo_Modificaciones.idPeriodo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cat_Solicitudes.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cat_Solicitudes.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleados.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idSolicitud }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

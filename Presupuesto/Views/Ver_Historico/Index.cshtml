@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Presupuesto.Ver_Historico>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depto_Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Partida_Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depto_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Partida_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Saldo_Inicial_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solicitante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Analista_Responsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado_Solicitud)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depto_Origen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Partida_Origen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nuevo_Saldo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depto_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Partida_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Saldo_Inicial_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nuevo_Saldo_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Solicitante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Analista_Responsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado_Solicitud)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

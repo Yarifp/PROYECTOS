@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Presupuesto.Cat_Departamentos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Presupuesto_autorizado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Presupuesto_asignado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Presupuesto_autorizado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Presupuesto_asignado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idDepto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idDepto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idDepto })
+        </td>
+    </tr>
+}
+
+</table>

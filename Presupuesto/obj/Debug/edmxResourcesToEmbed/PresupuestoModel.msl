@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MODIFICACION_PRESUPUESTOModelStoreContainer" CdmEntityContainer="MODIFICACION_PRESUPUESTOEntities">
+    <EntitySetMapping Name="Cat_Departamentos">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Departamentos">
+        <MappingFragment StoreEntitySet="Cat_Departamentos">
+          <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Presupuesto_autorizado" ColumnName="Presupuesto_autorizado" />
+          <ScalarProperty Name="Presupuesto_asignado" ColumnName="Presupuesto_asignado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Estado_Solicitud">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Estado_Solicitud">
+        <MappingFragment StoreEntitySet="Cat_Estado_Solicitud">
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Estado_Usuario">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Estado_Usuario">
+        <MappingFragment StoreEntitySet="Cat_Estado_Usuario">
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Partidas">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Partidas">
+        <MappingFragment StoreEntitySet="Cat_Partidas">
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Periodo_Modificaciones">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Periodo_Modificaciones">
+        <MappingFragment StoreEntitySet="Cat_Periodo_Modificaciones">
+          <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+          <ScalarProperty Name="Fecha_Apertura" ColumnName="Fecha_Apertura" />
+          <ScalarProperty Name="Fecha_Cierre" ColumnName="Fecha_Cierre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Roles">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Roles">
+        <MappingFragment StoreEntitySet="Cat_Roles">
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Solicitudes">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Cat_Solicitudes">
+        <MappingFragment StoreEntitySet="Cat_Solicitudes">
+          <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Empleados">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+          <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+          <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+          <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+          <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Historico">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Historico">
+        <MappingFragment StoreEntitySet="Historico">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+          <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+          <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+          <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+          <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+          <ScalarProperty Name="idDepto_Origen" ColumnName="idDepto_Origen" />
+          <ScalarProperty Name="CodPartida_Origen" ColumnName="CodPartida_Origen" />
+          <ScalarProperty Name="Saldo_Origen_Inicial" ColumnName="Saldo_Origen_Inicial" />
+          <ScalarProperty Name="Monto_Solicitud" ColumnName="Monto_Solicitud" />
+          <ScalarProperty Name="Nuevo_Saldo_Origen" ColumnName="Nuevo_Saldo_Origen" />
+          <ScalarProperty Name="idDepartamento_Destino" ColumnName="idDepartamento_Destino" />
+          <ScalarProperty Name="CodPartida_Destino" ColumnName="CodPartida_Destino" />
+          <ScalarProperty Name="Saldo_Destino_Inicial" ColumnName="Saldo_Destino_Inicial" />
+          <ScalarProperty Name="Monto_Solicitud2" ColumnName="Monto_Solicitud2" />
+          <ScalarProperty Name="Nuevo_Saldo_Destino" ColumnName="Nuevo_Saldo_Destino" />
+          <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+          <ScalarProperty Name="idResponsable" ColumnName="idResponsable" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partidas_Asignadas">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Partidas_Asignadas">
+        <MappingFragment StoreEntitySet="Partidas_Asignadas">
+          <ScalarProperty Name="idAsig" ColumnName="idAsig" />
+          <ScalarProperty Name="CodigoPartida" ColumnName="CodigoPartida" />
+          <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+          <ScalarProperty Name="Monto_asignado" ColumnName="Monto_asignado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Solicitudes">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Solicitudes">
+        <MappingFragment StoreEntitySet="Solicitudes">
+          <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+          <ScalarProperty Name="idTipoSolicitud" ColumnName="idTipoSolicitud" />
+          <ScalarProperty Name="idSolicitante" ColumnName="idSolicitante" />
+          <ScalarProperty Name="idPeriodo" ColumnName="idPeriodo" />
+          <ScalarProperty Name="idDepartamento_Origen" ColumnName="idDepartamento_Origen" />
+          <ScalarProperty Name="CodPartida_Origen" ColumnName="CodPartida_Origen" />
+          <ScalarProperty Name="idDepartamento_Destino" ColumnName="idDepartamento_Destino" />
+          <ScalarProperty Name="CodPartida_Destino" ColumnName="CodPartida_Destino" />
+          <ScalarProperty Name="Monto_Solicitado" ColumnName="Monto_Solicitado" />
+          <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+          <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+          <ScalarProperty Name="Correo_electronico" ColumnName="Correo_electronico" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="idDepto" ColumnName="idDepto" />
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ver_Cod_Partidas_Asignadas">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Cod_Partidas_Asignadas">
+        <MappingFragment StoreEntitySet="Ver_Cod_Partidas_Asignadas">
+          <ScalarProperty Name="IdDepto" ColumnName="IdDepto" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Cod" ColumnName="Cod" />
+          <ScalarProperty Name="Partida" ColumnName="Partida" />
+          <ScalarProperty Name="Monto_asignado" ColumnName="Monto_asignado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ver_Historico">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Historico">
+        <MappingFragment StoreEntitySet="Ver_Historico">
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Solicitud" ColumnName="Solicitud" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+          <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+          <ScalarProperty Name="Depto_Origen" ColumnName="Depto_Origen" />
+          <ScalarProperty Name="Cod_Partida" ColumnName="Cod_Partida" />
+          <ScalarProperty Name="Partida_Origen" ColumnName="Partida_Origen" />
+          <ScalarProperty Name="Saldo_Inicial" ColumnName="Saldo_Inicial" />
+          <ScalarProperty Name="Monto_Solicitud" ColumnName="Monto_Solicitud" />
+          <ScalarProperty Name="Nuevo_Saldo" ColumnName="Nuevo_Saldo" />
+          <ScalarProperty Name="Depto_Destino" ColumnName="Depto_Destino" />
+          <ScalarProperty Name="Cod_Partida_Destino" ColumnName="Cod_Partida_Destino" />
+          <ScalarProperty Name="Partida_Destino" ColumnName="Partida_Destino" />
+          <ScalarProperty Name="Saldo_Inicial_Destino" ColumnName="Saldo_Inicial_Destino" />
+          <ScalarProperty Name="Monto__Solicitud" ColumnName="Monto__Solicitud" />
+          <ScalarProperty Name="Nuevo_Saldo_Destino" ColumnName="Nuevo_Saldo_Destino" />
+          <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+          <ScalarProperty Name="Analista_Responsable" ColumnName="Analista_Responsable" />
+          <ScalarProperty Name="Estado_Solicitud" ColumnName="Estado_Solicitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ver_Solicitudes">
+      <EntityTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.Ver_Solicitudes">
+        <MappingFragment StoreEntitySet="Ver_Solicitudes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Depto_Origen" ColumnName="Depto_Origen" />
+          <ScalarProperty Name="Codigo_PartidaOrigen" ColumnName="Codigo_PartidaOrigen" />
+          <ScalarProperty Name="Partida_Origen" ColumnName="Partida_Origen" />
+          <ScalarProperty Name="Depto_Destino" ColumnName="Depto_Destino" />
+          <ScalarProperty Name="Codigo_PartidaDestino" ColumnName="Codigo_PartidaDestino" />
+          <ScalarProperty Name="Partida_Destino" ColumnName="Partida_Destino" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Fecha_Solicitud" ColumnName="Fecha_Solicitud" />
+          <ScalarProperty Name="Fecha_Respuesta" ColumnName="Fecha_Respuesta" />
+          <ScalarProperty Name="Estado_Solicitud" ColumnName="Estado_Solicitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Act_Roles" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Act_Roles" />
+    <FunctionImportMapping FunctionImportName="Aprobar_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Aprobar_Solicitud" />
+    <FunctionImportMapping FunctionImportName="Asig_Presupuesto_Partida" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Asig_Presupuesto_Partida" />
+    <FunctionImportMapping FunctionImportName="Bloquer_Usuario" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Bloquer_Usuario" />
+    <FunctionImportMapping FunctionImportName="Definir_Periodo_Modificaciones" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Definir_Periodo_Modificaciones" />
+    <FunctionImportMapping FunctionImportName="Desbloquer_Usuario" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Desbloquer_Usuario" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Categoria_Solicitudes" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Categoria_Solicitudes" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Departamentos" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Departamentos" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Empleados" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Empleados" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Estado_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Estado_Solicitud" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Estado_Usuarios" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Estado_Usuarios" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Partidas" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Partidas" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Roles" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Roles" />
+    <FunctionImportMapping FunctionImportName="Ingresar_Tipo_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Ingresar_Tipo_Solicitud" />
+    <FunctionImportMapping FunctionImportName="Rechazar_Solicitud" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Rechazar_Solicitud" />
+    <FunctionImportMapping FunctionImportName="Solicitar_Modificacion" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.Solicitar_Modificacion" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MODIFICACION_PRESUPUESTOModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="User_Pass" FunctionName="MODIFICACION_PRESUPUESTOModel.Store.User_Pass" />
+  </EntityContainerMapping>
+</Mapping>

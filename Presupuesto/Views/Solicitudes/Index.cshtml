@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Presupuesto.Solicitudes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodPartida_Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodPartida_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto_Solicitado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_Solicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_Respuesta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Departamentos.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Departamentos1.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Estado_Solicitud.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Periodo_Modificaciones.idPeriodo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cat_Solicitudes.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodPartida_Origen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodPartida_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto_Solicitado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_Solicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_Respuesta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Departamentos.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Departamentos1.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Estado_Solicitud.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Periodo_Modificaciones.idPeriodo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cat_Solicitudes.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleados.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idSolicitud }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idSolicitud }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idSolicitud })
+        </td>
+    </tr>
+}
+
+</table>

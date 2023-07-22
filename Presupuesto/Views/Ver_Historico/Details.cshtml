@@ -1,0 +1,107 @@
+﻿@model Presupuesto.Ver_Historico
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ver_Historico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depto_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depto_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida_Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida_Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nuevo_Saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depto_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depto_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partida_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partida_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo_Inicial_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo_Inicial_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nuevo_Saldo_Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nuevo_Saldo_Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Solicitante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Solicitante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Analista_Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Analista_Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado_Solicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado_Solicitud)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
