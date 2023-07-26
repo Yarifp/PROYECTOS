@@ -198,8 +198,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
-    <Compile Include="Controllers\Ver_Cod_Partidas_AsignadasController.cs" />
     <Compile Include="Controllers\Ver_HistoricoController.cs" />
+    <Compile Include="Controllers\Ver_Partidas_AsignadasController.cs" />
     <Compile Include="Controllers\Ver_SolicitudesController.cs" />
     <Compile Include="Empleados.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
@@ -214,6 +214,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Partidas_Asignadas.cs">
+      <DependentUpon>PresupuestoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permisos.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PresupuestoModel.Context.cs">
@@ -241,6 +244,9 @@
     <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_LOGIN_Result.cs">
+      <DependentUpon>PresupuestoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
@@ -248,10 +254,16 @@
     <Compile Include="Usuarios.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ver_Cod_Partidas_Asignadas.cs">
+    <Compile Include="Ver_Historico.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ver_Historico.cs">
+    <Compile Include="Ver_Mis_Solicitudes.cs">
+      <DependentUpon>PresupuestoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ver_Partidas_Asignadas.cs">
+      <DependentUpon>PresupuestoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ver_Presupuestos.cs">
       <DependentUpon>PresupuestoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ver_Solicitudes.cs">
@@ -331,11 +343,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Ver_Cod_Partidas_Asignadas\Create.cshtml" />
-    <Content Include="Views\Ver_Cod_Partidas_Asignadas\Delete.cshtml" />
-    <Content Include="Views\Ver_Cod_Partidas_Asignadas\Details.cshtml" />
-    <Content Include="Views\Ver_Cod_Partidas_Asignadas\Edit.cshtml" />
-    <Content Include="Views\Ver_Cod_Partidas_Asignadas\Index.cshtml" />
     <Content Include="Views\Ver_Historico\Create.cshtml" />
     <Content Include="Views\Ver_Historico\Delete.cshtml" />
     <Content Include="Views\Ver_Historico\Details.cshtml" />
@@ -366,6 +373,11 @@
     <Content Include="Views\Solicitudes\Details.cshtml" />
     <Content Include="Views\Solicitudes\Edit.cshtml" />
     <Content Include="Views\Solicitudes\Index.cshtml" />
+    <Content Include="Views\Ver_Partidas_Asignadas\Create.cshtml" />
+    <Content Include="Views\Ver_Partidas_Asignadas\Delete.cshtml" />
+    <Content Include="Views\Ver_Partidas_Asignadas\Details.cshtml" />
+    <Content Include="Views\Ver_Partidas_Asignadas\Edit.cshtml" />
+    <Content Include="Views\Ver_Partidas_Asignadas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

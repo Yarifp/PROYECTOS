@@ -71,19 +71,31 @@ namespace Presupuesto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+
 
             bool loginExitoso = false;
 
+
+
             int rol = 0;
+            int idDepto = 0;
             //Aquí realizas la conexión a la base de datos
-            string connectionString = "Data Source = YARITZIFALLAS; Initial Catalog = MODIFICACION_PRESUPUESTO; User ID = sa; Password=123; Encrypt=False";
+            string connectionString = "Data Source = tiusr11pl.cuc-carrera-ti.ac.cr\\MSSQLSERVER2019; Initial Catalog = tiusr11pl_MODIFICACION_PRESUPUESTOS; User ID = Modificacion_Ajustes_P; Password=Modificacion123!!!; Encrypt=False";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+
+
+
+
                 connection.Open();
+
+
+
 
                 // Llamada al procedimiento almacenado
                 using (SqlCommand command = new SqlCommand("SP_LOGIN", connection))
@@ -94,6 +106,8 @@ namespace Presupuesto.Controllers
 
 
 
+
+
                     // Ejecución del procedimiento almacenado
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -101,12 +115,21 @@ namespace Presupuesto.Controllers
                         {
                             // El usuario y la contraseña son válidos
                             loginExitoso = true;
-
-                            rol = Convert.ToInt32(reader[0]);
+                            idDepto = Convert.ToInt32(reader["idDepto"]);
+                            rol = Convert.ToInt32(reader["idRol"]);
 
                         }
                     }
+                    Session["idDepto"] = idDepto.ToString();
                 }
+
+
+
+
+
+
+
+
             }
 
 
@@ -114,30 +137,33 @@ namespace Presupuesto.Controllers
             if (loginExitoso)
             {
 
+
+
+
+
                 switch (rol)
                 {
                     case 1:
                         //opcion de menu
-                        
-                        return RedirectToAction("Register", "Account");
-
+                        return RedirectToAction("Index", "Usuarios");
                     case 2:
                         return RedirectToAction("Index", "Cat_Partidas");
                     case 3:
-                        return RedirectToAction("Index", "Ver_Cod_Partidas_Asignadas");
+
+                        return RedirectToAction("Index", "Ver_Partidas_Asignadas1");
                     case 4:
-                        return RedirectToAction("Index", "Ver_Cod_Partidas_Asignadas");
+                        return RedirectToAction("Index", "Ver_Partidas_Asignadas1");
                     case 5:
                         return RedirectToAction("Index", "Ver_Solicitudes");
                     case 6:
                         return RedirectToAction("Index", "Ver_Historico");
                     default:
-                        ModelState.AddModelError("", "Código no válido.");
-                        return View(model);
+                        return RedirectToAction("AccessDenied", "Account");
                 }
 
-                // Redirigir al usuario a la página de inicio después del inicio de sesión exitoso
-                return RedirectToAction("Index", "Cat_Partidas");
+
+
+
             }
             else
             {
@@ -149,32 +175,6 @@ namespace Presupuesto.Controllers
 
 
 
-
-
-
-
-
-
-            //string prueba = entities.SP_LOGIN(model.Email, model.Password).ToString();
-
-            //return View();
-
-            // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
-            // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
-            //        return View(model);
-            //}
         }
 
         //
