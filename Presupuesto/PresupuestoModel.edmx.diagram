@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Solicitudes" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Usuarios" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Cod_Partidas_Asignadas" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Historico" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Solicitudes" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="MODIFICACION_PRESUPUESTOModel.FK__Empleados__idDep__398D8EEE" ManuallyRouted="false" />
@@ -42,6 +41,10 @@
         <AssociationConnector Association="MODIFICACION_PRESUPUESTOModel.FK__Solicitud__idSol__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="MODIFICACION_PRESUPUESTOModel.FK__Usuarios__idEmpl__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="MODIFICACION_PRESUPUESTOModel.FK__Historico__idSol__5070F446" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Mis_Solicitudes" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Partidas_Asignadas" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Ver_Presupuestos" Width="1.5" PointX="13.375" PointY="5.75" />
+        <EntityTypeShape EntityType="MODIFICACION_PRESUPUESTOModel.Permisos" Width="1.5" PointX="13.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

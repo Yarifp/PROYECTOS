@@ -40,9 +40,12 @@ namespace Presupuesto
         public virtual DbSet<Solicitudes> Solicitudes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        public virtual DbSet<Ver_Cod_Partidas_Asignadas> Ver_Cod_Partidas_Asignadas { get; set; }
         public virtual DbSet<Ver_Historico> Ver_Historico { get; set; }
         public virtual DbSet<Ver_Solicitudes> Ver_Solicitudes { get; set; }
+        public virtual DbSet<Ver_Mis_Solicitudes> Ver_Mis_Solicitudes { get; set; }
+        public virtual DbSet<Ver_Partidas_Asignadas> Ver_Partidas_Asignadas { get; set; }
+        public virtual DbSet<Ver_Presupuestos> Ver_Presupuestos { get; set; }
+        public virtual DbSet<Permisos> Permisos { get; set; }
     
         public virtual int Act_Roles(Nullable<int> idEmpleado, Nullable<int> idRol)
         {
@@ -394,6 +397,48 @@ namespace Presupuesto
                 new ObjectParameter("exclude", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("User_Pass", lenParameter, minParameter, rangeParameter, excludeParameter, output);
+        }
+    
+        public virtual int Ingresar_Empleados2(string nombre, string primer_Apellido, string segundo_Apellido, string correo_Electronico, Nullable<int> idDepto, Nullable<int> idRol)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var primer_ApellidoParameter = primer_Apellido != null ?
+                new ObjectParameter("Primer_Apellido", primer_Apellido) :
+                new ObjectParameter("Primer_Apellido", typeof(string));
+    
+            var segundo_ApellidoParameter = segundo_Apellido != null ?
+                new ObjectParameter("Segundo_Apellido", segundo_Apellido) :
+                new ObjectParameter("Segundo_Apellido", typeof(string));
+    
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            var idDeptoParameter = idDepto.HasValue ?
+                new ObjectParameter("idDepto", idDepto) :
+                new ObjectParameter("idDepto", typeof(int));
+    
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("idRol", idRol) :
+                new ObjectParameter("idRol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Ingresar_Empleados2", nombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, correo_ElectronicoParameter, idDeptoParameter, idRolParameter);
+        }
+    
+        public virtual ObjectResult<SP_LOGIN_Result> SP_LOGIN(string correo_electronico, string contrasena)
+        {
+            var correo_electronicoParameter = correo_electronico != null ?
+                new ObjectParameter("Correo_electronico", correo_electronico) :
+                new ObjectParameter("Correo_electronico", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LOGIN_Result>("SP_LOGIN", correo_electronicoParameter, contrasenaParameter);
         }
     }
 }
