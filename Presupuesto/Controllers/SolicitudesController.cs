@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Presupuesto;
@@ -148,5 +150,49 @@ namespace Presupuesto.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AprobarSolicitud()
+        {
+            Solicitudes solicitudes = new Solicitudes();
+
+
+            try
+            {
+                // Your connection string
+                string connectionString = "Data Source = tiusr11pl.cuc-carrera-ti.ac.cr\\MSSQLSERVER2019; Initial Catalog = tiusr11pl_MODIFICACION_PRESUPUESTOS; User ID = Modificacion_Ajustes_P; Password=Modificacion123!!!; Encrypt=False";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Call the stored procedure
+                    using (SqlCommand cmd = new SqlCommand("dbo.Aprobar_Solicitud", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idSolicitud", solicitudes.idSolicitud);
+                        cmd.Parameters.AddWithValue("@idResponsable", solicitudes.idSolicitante);
+
+                        // Execute the stored procedure
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Solicitud aprobada successfully, return a success response or redirect to appropriate view
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+
+            }
+            catch (SqlException ex)
+            {
+                // Handle the SQL exception, return an error response or redirect to appropriate error view
+                return RedirectToAction("Error", "YourController", new { message = ex.Message });
+            }
+        }
+
+        // Other methods in your controller here...
     }
+
 }
+

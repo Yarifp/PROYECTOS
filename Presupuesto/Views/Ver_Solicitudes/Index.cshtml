@@ -1,6 +1,8 @@
 ﻿
 @model List<Ver_Solicitudes>
 
+
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,45 +10,71 @@
 
 <h2>Aprobar o Rechazar Solicitudes</h2>
 
+
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
 <table class="table">
-
-    <tr>
-        <th>Tipo</th>
-        <th>Solicitante</th>
-        <th>Departamento Origen</th>
-        <th>Partida Origen</th>
-        <th>Departamento Destino</th>
-        <th>Partida Destino</th>
-        <th>Estado Solicitud</th>
-        <th>Acciones</th> <!-- Columna para botones -->
-    </tr>
-
-    @foreach (var solicitud in Model)
+    @using (Html.BeginForm("AprobarSolicitud", "Solicitudes", FormMethod.Post))
     {
-        if (solicitud.Estado_Solicitud == "Enviada")
-        {
-            <tr>
-                <td>@solicitud.Tipo</td>
-                <td>@solicitud.Solicitante</td>
-                <td>@solicitud.Depto_Origen</td>
-                <td>@solicitud.Partida_Origen</td>
-                <td>@solicitud.Depto_Destino</td>
-                <td>@solicitud.Partida_Destino</td>
-                <td>@solicitud.Estado_Solicitud</td>
-                <td>
+        @*@using (Html.BeginForm("AprobarSolicitud", "Solicitudes", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {*@
+        @Html.AntiForgeryToken()
 
-                    <button class="btn-aceptar" data-id="@solicitud.ID">Aceptar Solicitud</button>                    <button class="btn-rechazar" data-id="@solicitud.ID">Rechazar Solicitud</button>
-                    <div class="motivo-rechazo" style="display: none;">
-                        <label for="motivo-@solicitud.ID">Motivo del Rechazo:</label>
-                        <input type="text" id="motivo-@solicitud.ID" />
-                        <button class="btn-confirmar-rechazo" data-id="@solicitud.ID">Confirmar Rechazo</button>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <!-- Encabezados de la tabla -->
+            <th>Tipo</th>
+            <th>Solicitante</th>
+            <th>Departamento Origen</th>
+            <th>Partida Origen</th>
+            <th>Departamento Destino</th>
+            <th>Partida Destino</th>
+            <th>Estado Solicitud</th>
+            <th>Acciones</th>
+        </tr>
+
+        <!-- Filas con datos -->
+        foreach (var solicitud in Model)
+        {
+            if (solicitud.Estado_Solicitud == "Enviada")
+            {
+                <tr>
+                    <!-- Datos de la tabla -->
+                    <td>@solicitud.Tipo</td>
+                    <td>@solicitud.Solicitante</td>
+                    <td>@solicitud.Depto_Origen</td>
+                    <td>@solicitud.Partida_Origen</td>
+                    <td>@solicitud.Depto_Destino</td>
+                    <td>@solicitud.Partida_Destino</td>
+                    <td>@solicitud.Estado_Solicitud</td>
+                    <td>
+                        <!-- Botones con atributos data para almacenar los IDs -->
+                        <button class="btn-aceptar" data-id="@solicitud.ID">Aceptar Solicitud</button>
+                        <button class="btn-rechazar" data-id="@solicitud.ID">Rechazar Solicitud</button>
+                        <div class="motivo-rechazo" style="display: none;">
+                            <label for="motivo-@solicitud.ID">Motivo del Rechazo:</label>
+                            <input type="text" id="motivo-@solicitud.ID" />
+                            <button class="btn-confirmar-rechazo" data-id="@solicitud.ID">Confirmar Rechazo</button>
+                        </div>
+                    </td>
+                </tr>
+            }
         }
+
+        <!-- Agregar un botón de envío dentro del formulario -->
+        <input type="submit" value="Enviar" />
     }
+
+
+
     }
-   
+
+    }
+
     }
 
 
@@ -78,7 +106,7 @@
                 });
             });
         });
-   
+
         $(document).ready(function () {
             $(".btn-rechazar").click(function () {
                 var solicitudId = $(this).data("id");
@@ -101,5 +129,36 @@
                 $(".btn-rechazar").show();
             });
         });
+    
+    <script>
+        // Manejar el clic en el botón "Aceptar Solicitud"
+        $('.solicitud-btn').click(function () {
+            var idSolicitud = $(this).data('id');
+
+            // Obtener el token antifalsificación
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            // Enviar la solicitud usando AJAX
+            $.ajax({
+                url: '@Url.Action("AprobarSolicitud", "Solicitudes")',
+                type: 'POST',
+                data: { idSolicitud: idSolicitud, idResponsable: /* proporciona el valor de idResponsable aquí */, __RequestVerificationToken: token },
+                success: function (result) {
+                    // Manejar la respuesta exitosa
+                    if (result.success) {
+                        // Cambiar el estado en la fila de la tabla
+                        var fila = $(`button[data-id="${idSolicitud}"]`).closest('tr');
+                        fila.find('td:last-child').html('Aprobada');
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Manejar el error
+                    console.log("Error al aprobar la solicitud: " + errorThrown);
+                }
+            });
+        });
     </script>
-    }
+}
+
+    </script>
+}
