@@ -1,70 +1,105 @@
-﻿@model IEnumerable<Presupuesto.Ver_Solicitudes>
+﻿
+@model List<Ver_Solicitudes>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Aprobar o Rechazar Solicitudes</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
+
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Solicitante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Depto_Origen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Partida_Origen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Depto_Destino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Partida_Destino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado_Solicitud)
-        </th>
-        <th></th>
+        <th>Tipo</th>
+        <th>Solicitante</th>
+        <th>Departamento Origen</th>
+        <th>Partida Origen</th>
+        <th>Departamento Destino</th>
+        <th>Partida Destino</th>
+        <th>Estado Solicitud</th>
+        <th>Acciones</th> <!-- Columna para botones -->
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Solicitante)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Depto_Origen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Partida_Origen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Depto_Destino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Partida_Destino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado_Solicitud)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var solicitud in Model)
+    {
+        if (solicitud.Estado_Solicitud == "Enviada")
+        {
+            <tr>
+                <td>@solicitud.Tipo</td>
+                <td>@solicitud.Solicitante</td>
+                <td>@solicitud.Depto_Origen</td>
+                <td>@solicitud.Partida_Origen</td>
+                <td>@solicitud.Depto_Destino</td>
+                <td>@solicitud.Partida_Destino</td>
+                <td>@solicitud.Estado_Solicitud</td>
+                <td>
+
+                    <button class="btn-aceptar" data-id="@solicitud.ID">Aceptar Solicitud</button>                    <button class="btn-rechazar" data-id="@solicitud.ID">Rechazar Solicitud</button>
+                    <div class="motivo-rechazo" style="display: none;">
+                        <label for="motivo-@solicitud.ID">Motivo del Rechazo:</label>
+                        <input type="text" id="motivo-@solicitud.ID" />
+                        <button class="btn-confirmar-rechazo" data-id="@solicitud.ID">Confirmar Rechazo</button>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    }
+   
+    }
+
+
 
 </table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".btn-aceptar").click(function () {
+                var solicitudId = $(this).data("id");
+
+
+
+                // Realizar solicitud AJAX al servidor para aprobar la solicitud
+                $.ajax({
+                    type: "POST",
+                    url: "/AccountController.cs/AprobarSolicitud", // Reemplaza "Solicitud" con el nombre del controlador que maneja la aprobación
+                    data: {
+                        idSolicitud: solicitudId
+                    },
+                    success: function (response) {
+                        // Manejar la respuesta del servidor si es necesario
+                        console.log("Solicitud aprobada correctamente.");
+                    },
+                    error: function (error) {
+                        // Manejar el error en caso de fallo en la solicitud AJAX
+                        console.error("Error al aprobar la solicitud: " + error.responseText);
+                    }
+                });
+            });
+        });
+   
+        $(document).ready(function () {
+            $(".btn-rechazar").click(function () {
+                var solicitudId = $(this).data("id");
+                $("#motivo-" + solicitudId).val("");
+                $(".motivo-rechazo").hide();
+                $(".btn-rechazar").show();
+                $(this).hide();
+                $("#motivo-" + solicitudId).parent().show();
+            });
+
+            $(".btn-confirmar-rechazo").click(function () {
+                var solicitudId = $(this).data("id");
+                var motivoRechazo = $("#motivo-" + solicitudId).val();
+                // Aquí puedes realizar una solicitud AJAX al servidor para enviar el motivo de rechazo
+                // Puedes usar la variable 'motivoRechazo' para enviar el motivo al servidor
+                // ...
+
+                // Para este ejemplo, simplemente ocultamos la barra de motivo de rechazo y mostramos el botón de rechazar nuevamente
+                $(".motivo-rechazo").hide();
+                $(".btn-rechazar").show();
+            });
+        });
+    </script>
+    }

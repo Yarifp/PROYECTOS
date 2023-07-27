@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MODIFICACION_PRESUPUESTOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cat_Departamentos">
+    <Key>
+      <PropertyRef Name="idDepto" />
+    </Key>
+    <Property Name="idDepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Presupuesto_autorizado" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Presupuesto_asignado" Type="decimal" Precision="19" Scale="2" />
+  </EntityType>
+  <EntityType Name="Cat_Estado_Solicitud">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Estado_Usuario">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Partidas">
+    <Key>
+      <PropertyRef Name="idPartida" />
+    </Key>
+    <Property Name="idPartida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Periodo_Modificaciones">
+    <Key>
+      <PropertyRef Name="idPeriodo" />
+    </Key>
+    <Property Name="idPeriodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha_Apertura" Type="date" Nullable="false" />
+    <Property Name="Fecha_Cierre" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Roles">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rol" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Solicitudes">
+    <Key>
+      <PropertyRef Name="idTipoSolicitud" />
+    </Key>
+    <Property Name="idTipoSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="idEmpleado" />
+    </Key>
+    <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Primer_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Segundo_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Correo_Electronico" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Nombre_Completo" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="idDepto" Type="int" Nullable="false" />
+    <Property Name="idRol" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Historico">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idPeriodo" Type="int" Nullable="false" />
+    <Property Name="idSolicitud" Type="int" Nullable="false" />
+    <Property Name="idTipoSolicitud" Type="int" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+    <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+    <Property Name="idDepto_Origen" Type="int" Nullable="false" />
+    <Property Name="CodPartida_Origen" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Saldo_Origen_Inicial" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Monto_Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Nuevo_Saldo_Origen" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="idDepartamento_Destino" Type="int" Nullable="false" />
+    <Property Name="CodPartida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Saldo_Destino_Inicial" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="Monto_Solicitud2" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Nuevo_Saldo_Destino" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="idSolicitante" Type="int" Nullable="false" />
+    <Property Name="idResponsable" Type="int" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Partidas_Asignadas">
+    <Key>
+      <PropertyRef Name="idAsig" />
+    </Key>
+    <Property Name="idAsig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoPartida" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="idDepartamento" Type="int" Nullable="false" />
+    <Property Name="Monto_asignado" Type="decimal" Precision="19" Scale="2" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Permisos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="Administracion" />
+      <PropertyRef Name="Solicitar_Modificacion" />
+      <PropertyRef Name="Responder_Solicitudes" />
+    </Key>
+    <Property Name="Usuario" Type="varchar" MaxLength="200" />
+    <Property Name="Administracion" Type="int" Nullable="false" />
+    <Property Name="Solicitar_Modificacion" Type="int" Nullable="false" />
+    <Property Name="Responder_Solicitudes" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Solicitudes">
+    <Key>
+      <PropertyRef Name="idSolicitud" />
+    </Key>
+    <Property Name="idSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idTipoSolicitud" Type="int" Nullable="false" />
+    <Property Name="idSolicitante" Type="int" Nullable="false" />
+    <Property Name="idPeriodo" Type="int" Nullable="false" />
+    <Property Name="idDepartamento_Origen" Type="int" Nullable="false" />
+    <Property Name="CodPartida_Origen" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="idDepartamento_Destino" Type="int" Nullable="false" />
+    <Property Name="CodPartida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Monto_Solicitado" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+    <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Usuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+      <PropertyRef Name="Nombre_Usuario" />
+      <PropertyRef Name="Contrasena" />
+      <PropertyRef Name="idDepto" />
+      <PropertyRef Name="idRol" />
+      <PropertyRef Name="idEmpleado" />
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="200" />
+    <Property Name="Nombre_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Correo_electronico" Type="varchar" MaxLength="200" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="62" Nullable="false" />
+    <Property Name="idDepto" Type="int" Nullable="false" />
+    <Property Name="idRol" Type="int" Nullable="false" />
+    <Property Name="idEmpleado" Type="int" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Ver_Historico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ver_Historico">
+    <Key>
+      <PropertyRef Name="Periodo" />
+      <PropertyRef Name="Solicitud" />
+      <PropertyRef Name="Fecha_Solicitud" />
+      <PropertyRef Name="Fecha_Respuesta" />
+      <PropertyRef Name="Cod_Partida" />
+      <PropertyRef Name="Saldo_Inicial" />
+      <PropertyRef Name="Monto_Solicitud" />
+      <PropertyRef Name="Cod_Partida_Destino" />
+      <PropertyRef Name="Monto__Solicitud" />
+    </Key>
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="Solicitud" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="20" />
+    <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+    <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+    <Property Name="Depto_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Cod_Partida" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Saldo_Inicial" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Monto_Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Nuevo_Saldo" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="Depto_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Cod_Partida_Destino" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Saldo_Inicial_Destino" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="Monto__Solicitud" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Nuevo_Saldo_Destino" Type="decimal" Precision="19" Scale="2" />
+    <Property Name="Solicitante" Type="varchar" MaxLength="200" />
+    <Property Name="Analista_Responsable" Type="varchar" MaxLength="200" />
+    <Property Name="Estado_Solicitud" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Ver_Mis_Solicitudes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ver_Mis_Solicitudes">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Periodo" />
+      <PropertyRef Name="Codigo_PartidaOrigen" />
+      <PropertyRef Name="Codigo_PartidaDestino" />
+      <PropertyRef Name="Monto" />
+      <PropertyRef Name="Fecha_Solicitud" />
+      <PropertyRef Name="Fecha_Respuesta" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="20" />
+    <Property Name="Solicitante" Type="varchar" MaxLength="200" />
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="Depto" Type="int" />
+    <Property Name="Depto_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Codigo_PartidaOrigen" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Depto_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Codigo_PartidaDestino" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Monto" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+    <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+    <Property Name="Estado_Solicitud" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Ver_Partidas_Asignadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ver_Partidas_Asignadas">
+    <Key>
+      <PropertyRef Name="IdDepto" />
+      <PropertyRef Name="Cod" />
+    </Key>
+    <Property Name="IdDepto" Type="int" Nullable="false" />
+    <Property Name="Departamento" Type="varchar" MaxLength="100" />
+    <Property Name="Cod" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida" Type="varchar" MaxLength="100" />
+    <Property Name="Monto_asignado" Type="decimal" Precision="19" Scale="2" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Ver_Presupuestos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ver_Presupuestos">
+    <Key>
+      <PropertyRef Name="Depto" />
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Presupuesto_autorizado" />
+    </Key>
+    <Property Name="Depto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Presupuesto_autorizado" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Presupuesto_asignado" Type="decimal" Precision="19" Scale="2" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tiusr11pl_MODIFICACION_PRESUPUESTOS.dbo.Ver_Solicitudes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ver_Solicitudes">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Periodo" />
+      <PropertyRef Name="Codigo_PartidaOrigen" />
+      <PropertyRef Name="Codigo_PartidaDestino" />
+      <PropertyRef Name="Monto" />
+      <PropertyRef Name="Fecha_Solicitud" />
+      <PropertyRef Name="Fecha_Respuesta" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="20" />
+    <Property Name="Solicitante" Type="varchar" MaxLength="200" />
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="Depto_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Codigo_PartidaOrigen" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Origen" Type="varchar" MaxLength="100" />
+    <Property Name="Depto_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Codigo_PartidaDestino" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Partida_Destino" Type="varchar" MaxLength="100" />
+    <Property Name="Monto" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+    <Property Name="Fecha_Solicitud" Type="date" Nullable="false" />
+    <Property Name="Fecha_Respuesta" Type="date" Nullable="false" />
+    <Property Name="Estado_Solicitud" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Empleados__idDep__398D8EEE">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="idDepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__idRol__38996AB5">
+    <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Roles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="idRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Historico__CodPa__534D60F1' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Historico__CodPa__534D60F1" />-->
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Historico__CodPa__5535A963' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Historico__CodPa__5535A963" />-->
+  <Association Name="FK__Historico__idDep__52593CB8">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idDepto_Origen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idDep__5441852A">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idDepartamento_Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idEst__5812160E">
+    <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Estado_Solicitud">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idPer__4F7CD00D">
+    <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Periodo_Modificaciones">
+        <PropertyRef Name="idPeriodo" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idPeriodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idRes__571DF1D5">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="idEmpleado" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idSol__5070F446">
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solicitudes">
+        <PropertyRef Name="idSolicitud" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idSol__5629CD9C">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="idEmpleado" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idSolicitante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historico__idTip__5165187F">
+    <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+    <End Role="Historico" Type="Self.Historico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Solicitudes">
+        <PropertyRef Name="idTipoSolicitud" />
+      </Principal>
+      <Dependent Role="Historico">
+        <PropertyRef Name="idTipoSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Partidas___Codig__4222D4EF' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Partidas___Codig__4222D4EF" />-->
+  <Association Name="FK__Partidas___idDep__4316F928">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Partidas_Asignadas" Type="Self.Partidas_Asignadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Partidas_Asignadas">
+        <PropertyRef Name="idDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Solicitud__CodPa__49C3F6B7' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Solicitud__CodPa__49C3F6B7" />-->
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__Solicitud__CodPa__4BAC3F29' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__Solicitud__CodPa__4BAC3F29" />-->
+  <Association Name="FK__Solicitud__idDep__48CFD27E">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idDepartamento_Origen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Solicitud__idDep__4AB81AF0">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idDepartamento_Destino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Solicitud__idEst__4CA06362">
+    <End Role="Cat_Estado_Solicitud" Type="Self.Cat_Estado_Solicitud" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Estado_Solicitud">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Solicitud__idPer__47DBAE45">
+    <End Role="Cat_Periodo_Modificaciones" Type="Self.Cat_Periodo_Modificaciones" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Periodo_Modificaciones">
+        <PropertyRef Name="idPeriodo" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idPeriodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Solicitud__idSol__46E78A0C">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="idEmpleado" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idSolicitante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Solicitud__idTip__45F365D3">
+    <End Role="Cat_Solicitudes" Type="Self.Cat_Solicitudes" Multiplicity="1" />
+    <End Role="Solicitudes" Type="Self.Solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Solicitudes">
+        <PropertyRef Name="idTipoSolicitud" />
+      </Principal>
+      <Dependent Role="Solicitudes">
+        <PropertyRef Name="idTipoSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__idDept__3F466844">
+    <End Role="Cat_Departamentos" Type="Self.Cat_Departamentos" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Departamentos">
+        <PropertyRef Name="idDepto" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idDepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__idEmpl__3D5E1FD2">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="idEmpleado" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__idEsta__3E52440B">
+    <End Role="Cat_Estado_Usuario" Type="Self.Cat_Estado_Usuario" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Estado_Usuario">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__idRol__3C69FB99">
+    <End Role="Cat_Roles" Type="Self.Cat_Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cat_Roles">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="idRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Act_Roles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEmpleado" Type="int" Mode="In" />
+    <Parameter Name="IdRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Aprobar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSolicitud" Type="int" Mode="In" />
+    <Parameter Name="idResponsable" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Asig_Presupuesto_Partida" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idDepto" Type="int" Mode="In" />
+    <Parameter Name="Cod_Partida" Type="varchar" Mode="In" />
+    <Parameter Name="Monto_asignado" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="Bloquer_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Definir_Periodo_Modificaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Fecha_Apertura" Type="date" Mode="In" />
+    <Parameter Name="Fecha_Cierre" Type="date" Mode="In" />
+  </Function>
+  <Function Name="Desbloquer_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="Ingresar_Categoria_Solicitudes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Categoria" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Departamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Presupuesto_autorizado" Type="decimal" Mode="In" />
+    <Parameter Name="Presupuesto_asignado" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Empleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
+    <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
+    <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+    <Parameter Name="idDepto" Type="int" Mode="In" />
+    <Parameter Name="idRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Empleados2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
+    <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
+    <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+    <Parameter Name="idDepto" Type="int" Mode="In" />
+    <Parameter Name="idRol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Estado_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Estado_Usuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Estado" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Partidas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Roles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Rol" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Ingresar_Tipo_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tipo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Rechazar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSolicitud" Type="int" Mode="In" />
+    <Parameter Name="idResponsable" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Solicitar_Modificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idTipo" Type="int" Mode="In" />
+    <Parameter Name="idSolicitante" Type="int" Mode="In" />
+    <Parameter Name="idPeriodo" Type="int" Mode="In" />
+    <Parameter Name="idDepto_Ori" Type="int" Mode="In" />
+    <Parameter Name="Cod_Partida_Ori" Type="varchar" Mode="In" />
+    <Parameter Name="idDepto_Dest" Type="int" Mode="In" />
+    <Parameter Name="Cod_Partida_Dest" Type="varchar" Mode="In" />
+    <Parameter Name="Monto_solicitado" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="User_Pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="len" Type="int" Mode="In" />
+    <Parameter Name="min" Type="tinyint" Mode="In" />
+    <Parameter Name="range" Type="tinyint" Mode="In" />
+    <Parameter Name="exclude" Type="varchar" Mode="In" />
+    <Parameter Name="output" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="SP_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Modificacion_Ajustes_P">
+    <Parameter Name="Correo_electronico" Type="varchar" Mode="In" />
+    <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="MODIFICACION_PRESUPUESTOModelStoreContainer">
+    <EntitySet Name="Cat_Departamentos" EntityType="Self.Cat_Departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Estado_Solicitud" EntityType="Self.Cat_Estado_Solicitud" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Estado_Usuario" EntityType="Self.Cat_Estado_Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Partidas" EntityType="Self.Cat_Partidas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Periodo_Modificaciones" EntityType="Self.Cat_Periodo_Modificaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Roles" EntityType="Self.Cat_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cat_Solicitudes" EntityType="Self.Cat_Solicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Historico" EntityType="Self.Historico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partidas_Asignadas" EntityType="Self.Partidas_Asignadas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Solicitudes" EntityType="Self.Solicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permisos" EntityType="Self.Permisos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Permisos].[Usuario] AS [Usuario], 
+    [Permisos].[Administracion] AS [Administracion], 
+    [Permisos].[Solicitar_Modificacion] AS [Solicitar_Modificacion], 
+    [Permisos].[Responder_Solicitudes] AS [Responder_Solicitudes]
+    FROM [dbo].[Permisos] AS [Permisos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Usuarios].[idUsuario] AS [idUsuario], 
+    [Usuarios].[Usuario] AS [Usuario], 
+    [Usuarios].[Nombre_Usuario] AS [Nombre_Usuario], 
+    [Usuarios].[Correo_electronico] AS [Correo_electronico], 
+    [Usuarios].[Contrasena] AS [Contrasena], 
+    [Usuarios].[idDepto] AS [idDepto], 
+    [Usuarios].[idRol] AS [idRol], 
+    [Usuarios].[idEmpleado] AS [idEmpleado], 
+    [Usuarios].[idEstado] AS [idEstado]
+    FROM [dbo].[Usuarios] AS [Usuarios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ver_Historico" EntityType="Self.Ver_Historico" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ver_Historico].[Periodo] AS [Periodo], 
+    [Ver_Historico].[Solicitud] AS [Solicitud], 
+    [Ver_Historico].[Tipo] AS [Tipo], 
+    [Ver_Historico].[Fecha_Solicitud] AS [Fecha_Solicitud], 
+    [Ver_Historico].[Fecha_Respuesta] AS [Fecha_Respuesta], 
+    [Ver_Historico].[Depto_Origen] AS [Depto_Origen], 
+    [Ver_Historico].[Cod_Partida] AS [Cod_Partida], 
+    [Ver_Historico].[Partida_Origen] AS [Partida_Origen], 
+    [Ver_Historico].[Saldo_Inicial] AS [Saldo_Inicial], 
+    [Ver_Historico].[Monto_Solicitud] AS [Monto_Solicitud], 
+    [Ver_Historico].[Nuevo_Saldo] AS [Nuevo_Saldo], 
+    [Ver_Historico].[Depto_Destino] AS [Depto_Destino], 
+    [Ver_Historico].[Cod_Partida_Destino] AS [Cod_Partida_Destino], 
+    [Ver_Historico].[Partida_Destino] AS [Partida_Destino], 
+    [Ver_Historico].[Saldo_Inicial_Destino] AS [Saldo_Inicial_Destino], 
+    [Ver_Historico].[Monto__Solicitud] AS [Monto__Solicitud], 
+    [Ver_Historico].[Nuevo_Saldo_Destino] AS [Nuevo_Saldo_Destino], 
+    [Ver_Historico].[Solicitante] AS [Solicitante], 
+    [Ver_Historico].[Analista_Responsable] AS [Analista_Responsable], 
+    [Ver_Historico].[Estado_Solicitud] AS [Estado_Solicitud]
+    FROM [dbo].[Ver_Historico] AS [Ver_Historico]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ver_Mis_Solicitudes" EntityType="Self.Ver_Mis_Solicitudes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ver_Mis_Solicitudes].[ID] AS [ID], 
+    [Ver_Mis_Solicitudes].[Tipo] AS [Tipo], 
+    [Ver_Mis_Solicitudes].[Solicitante] AS [Solicitante], 
+    [Ver_Mis_Solicitudes].[Periodo] AS [Periodo], 
+    [Ver_Mis_Solicitudes].[Depto] AS [Depto], 
+    [Ver_Mis_Solicitudes].[Depto_Origen] AS [Depto_Origen], 
+    [Ver_Mis_Solicitudes].[Codigo_PartidaOrigen] AS [Codigo_PartidaOrigen], 
+    [Ver_Mis_Solicitudes].[Partida_Origen] AS [Partida_Origen], 
+    [Ver_Mis_Solicitudes].[Depto_Destino] AS [Depto_Destino], 
+    [Ver_Mis_Solicitudes].[Codigo_PartidaDestino] AS [Codigo_PartidaDestino], 
+    [Ver_Mis_Solicitudes].[Partida_Destino] AS [Partida_Destino], 
+    [Ver_Mis_Solicitudes].[Monto] AS [Monto], 
+    [Ver_Mis_Solicitudes].[Fecha_Solicitud] AS [Fecha_Solicitud], 
+    [Ver_Mis_Solicitudes].[Fecha_Respuesta] AS [Fecha_Respuesta], 
+    [Ver_Mis_Solicitudes].[Estado_Solicitud] AS [Estado_Solicitud]
+    FROM [dbo].[Ver_Mis_Solicitudes] AS [Ver_Mis_Solicitudes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ver_Partidas_Asignadas" EntityType="Self.Ver_Partidas_Asignadas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ver_Partidas_Asignadas].[IdDepto] AS [IdDepto], 
+    [Ver_Partidas_Asignadas].[Departamento] AS [Departamento], 
+    [Ver_Partidas_Asignadas].[Cod] AS [Cod], 
+    [Ver_Partidas_Asignadas].[Partida] AS [Partida], 
+    [Ver_Partidas_Asignadas].[Monto_asignado] AS [Monto_asignado]
+    FROM [dbo].[Ver_Partidas_Asignadas] AS [Ver_Partidas_Asignadas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ver_Presupuestos" EntityType="Self.Ver_Presupuestos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ver_Presupuestos].[Depto] AS [Depto], 
+    [Ver_Presupuestos].[Nombre] AS [Nombre], 
+    [Ver_Presupuestos].[Presupuesto_autorizado] AS [Presupuesto_autorizado], 
+    [Ver_Presupuestos].[Presupuesto_asignado] AS [Presupuesto_asignado]
+    FROM [dbo].[Ver_Presupuestos] AS [Ver_Presupuestos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ver_Solicitudes" EntityType="Self.Ver_Solicitudes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ver_Solicitudes].[ID] AS [ID], 
+    [Ver_Solicitudes].[Tipo] AS [Tipo], 
+    [Ver_Solicitudes].[Solicitante] AS [Solicitante], 
+    [Ver_Solicitudes].[Periodo] AS [Periodo], 
+    [Ver_Solicitudes].[Depto_Origen] AS [Depto_Origen], 
+    [Ver_Solicitudes].[Codigo_PartidaOrigen] AS [Codigo_PartidaOrigen], 
+    [Ver_Solicitudes].[Partida_Origen] AS [Partida_Origen], 
+    [Ver_Solicitudes].[Depto_Destino] AS [Depto_Destino], 
+    [Ver_Solicitudes].[Codigo_PartidaDestino] AS [Codigo_PartidaDestino], 
+    [Ver_Solicitudes].[Partida_Destino] AS [Partida_Destino], 
+    [Ver_Solicitudes].[Monto] AS [Monto], 
+    [Ver_Solicitudes].[Fecha_Solicitud] AS [Fecha_Solicitud], 
+    [Ver_Solicitudes].[Fecha_Respuesta] AS [Fecha_Respuesta], 
+    [Ver_Solicitudes].[Estado_Solicitud] AS [Estado_Solicitud]
+    FROM [dbo].[Ver_Solicitudes] AS [Ver_Solicitudes]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Empleados__idDep__398D8EEE" Association="Self.FK__Empleados__idDep__398D8EEE">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__idRol__38996AB5" Association="Self.FK__Empleados__idRol__38996AB5">
+      <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idDep__52593CB8" Association="Self.FK__Historico__idDep__52593CB8">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idDep__5441852A" Association="Self.FK__Historico__idDep__5441852A">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idEst__5812160E" Association="Self.FK__Historico__idEst__5812160E">
+      <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idPer__4F7CD00D" Association="Self.FK__Historico__idPer__4F7CD00D">
+      <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idRes__571DF1D5" Association="Self.FK__Historico__idRes__571DF1D5">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idSol__5070F446" Association="Self.FK__Historico__idSol__5070F446">
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idSol__5629CD9C" Association="Self.FK__Historico__idSol__5629CD9C">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historico__idTip__5165187F" Association="Self.FK__Historico__idTip__5165187F">
+      <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+      <End Role="Historico" EntitySet="Historico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Partidas___idDep__4316F928" Association="Self.FK__Partidas___idDep__4316F928">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Partidas_Asignadas" EntitySet="Partidas_Asignadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idDep__48CFD27E" Association="Self.FK__Solicitud__idDep__48CFD27E">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idDep__4AB81AF0" Association="Self.FK__Solicitud__idDep__4AB81AF0">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idEst__4CA06362" Association="Self.FK__Solicitud__idEst__4CA06362">
+      <End Role="Cat_Estado_Solicitud" EntitySet="Cat_Estado_Solicitud" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idPer__47DBAE45" Association="Self.FK__Solicitud__idPer__47DBAE45">
+      <End Role="Cat_Periodo_Modificaciones" EntitySet="Cat_Periodo_Modificaciones" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idSol__46E78A0C" Association="Self.FK__Solicitud__idSol__46E78A0C">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Solicitud__idTip__45F365D3" Association="Self.FK__Solicitud__idTip__45F365D3">
+      <End Role="Cat_Solicitudes" EntitySet="Cat_Solicitudes" />
+      <End Role="Solicitudes" EntitySet="Solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__idDept__3F466844" Association="Self.FK__Usuarios__idDept__3F466844">
+      <End Role="Cat_Departamentos" EntitySet="Cat_Departamentos" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__idEmpl__3D5E1FD2" Association="Self.FK__Usuarios__idEmpl__3D5E1FD2">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__idEsta__3E52440B" Association="Self.FK__Usuarios__idEsta__3E52440B">
+      <End Role="Cat_Estado_Usuario" EntitySet="Cat_Estado_Usuario" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__idRol__3C69FB99" Association="Self.FK__Usuarios__idRol__3C69FB99">
+      <End Role="Cat_Roles" EntitySet="Cat_Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
