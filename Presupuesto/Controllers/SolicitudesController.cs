@@ -157,7 +157,7 @@ namespace Presupuesto.Controllers
         public async Task<ActionResult> AprobarSolicitud()
         {
             Solicitudes solicitudes = new Solicitudes();
-
+            Ver_Solicitudes VerSo = new Ver_Solicitudes();
 
             try
             {
@@ -172,7 +172,7 @@ namespace Presupuesto.Controllers
                     using (SqlCommand cmd = new SqlCommand("dbo.Aprobar_Solicitud", connection))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@idSolicitud", solicitudes.idSolicitud);
+                        cmd.Parameters.AddWithValue("@idSolicitud", VerSo.ID);
                         cmd.Parameters.AddWithValue("@idResponsable", solicitudes.idSolicitante);
 
                         // Execute the stored procedure
