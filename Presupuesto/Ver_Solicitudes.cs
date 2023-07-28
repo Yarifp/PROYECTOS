@@ -11,7 +11,8 @@ namespace Presupuesto
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Ver_Solicitudes
     {
         public int ID { get; set; }

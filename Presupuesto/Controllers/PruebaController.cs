@@ -145,7 +145,7 @@ namespace Presupuesto.Controllers
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@idSolicitud", id);
                         // Assuming that you have a variable to store the id of the responsible person (idResponsable)
-                        cmd.Parameters.AddWithValue("@idResponsable", idResponsable);
+                        cmd.Parameters.AddWithValue("@idResponsable",idResponsable );
 
                         // Execute the stored procedure
                         cmd.ExecuteNonQuery();
@@ -164,13 +164,13 @@ namespace Presupuesto.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AprobarSolicitud(int id)
+        public async Task<ActionResult> AprobSoli(int id)
         {
             
 
             try
             {
-                ActionResult result = await AprobarSolicitud(id);
+                ActionResult result = await AprobarSolicitud(id, 5);
               
                 await Task.Delay(1000); // Simulando una tarea asincrónica.
 
