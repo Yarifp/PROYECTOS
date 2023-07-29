@@ -14,7 +14,7 @@
     </div>
 }
 
-@using (Html.BeginForm("AprobSoli", "Prueba", FormMethod.Post))
+@using (Html.BeginForm("AprobSoli", "Ver_Solicitudes", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -49,7 +49,7 @@
                     <td>@solicitud.Estado_Solicitud</td>
                     <td>
                         <!-- Botones con atributos data para almacenar los IDs -->
-                        <input type="submit" name="submitBtn" value="Aprobar Solicitud" formaction="@Url.Action("AprobSoli", "Prueba", new { id = solicitud.ID })" class="btn btn-primary" />
+                        <input type="submit" name="submitBtn" value="Aprobar Solicitud" formaction="@Url.Action("AprobSoli", "Ver_Solicitudes", new { id = solicitud.ID })" class="btn btn-primary" />
                         <button type="button" class="btn-rechazar" data-id="@solicitud.ID">Rechazar Solicitud</button>
                         <div class="motivo-rechazo" style="display: none;">
                             <label for="motivo-@solicitud.ID">Motivo del Rechazo:</label>

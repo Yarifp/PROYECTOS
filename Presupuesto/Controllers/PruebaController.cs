@@ -61,19 +61,19 @@ namespace Presupuesto.Controllers
         }
 
         // GET: Prueba/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ver_Solicitudes ver_Solicitudes = db.Ver_Solicitudes.Find(id);
-            if (ver_Solicitudes == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ver_Solicitudes);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Ver_Solicitudes ver_Solicitudes = db.Ver_Solicitudes.Find(id);
+        //    if (ver_Solicitudes == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(ver_Solicitudes);
+        //}
 
         // POST: Prueba/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
@@ -170,7 +170,7 @@ namespace Presupuesto.Controllers
 
             try
             {
-                ActionResult result = await AprobarSolicitud(id, 5);
+                ActionResult result = await AprobarSolicitud(id, 1);
               
                 await Task.Delay(1000); // Simulando una tarea asincrónica.
 
@@ -178,7 +178,8 @@ namespace Presupuesto.Controllers
                 TempData["SuccessMessage"] = successMessage;
 
                 // Redirigir de vuelta a la vista Edit con un mensaje de éxito
-                return RedirectToAction("Edit", new { id = id });
+                // return Json(new { Success = true, Message = successMessage });
+                return View("Index", "Home");
             }
             catch (Exception ex)
             {

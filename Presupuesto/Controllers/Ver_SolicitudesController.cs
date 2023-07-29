@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Presupuesto;
@@ -115,6 +117,73 @@ namespace Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+        //Aprobar Solicitudes
+        public async Task<ActionResult> AprobarSolicitud(int id, int idResponsable)
+        {
+            try
+            {
+                // Your connection string
+                string connectionString = "Data Source = tiusr11pl.cuc-carrera-ti.ac.cr\\MSSQLSERVER2019; Initial Catalog = tiusr11pl_MODIFICACION_PRESUPUESTOS; User ID = Modificacion_Ajustes_P; Password=Modificacion123!!!; Encrypt=False";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Call the stored procedure
+                    using (SqlCommand cmd = new SqlCommand("dbo.Aprobar_Solicitud", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@idSolicitud", id);
+                        // Assuming that you have a variable to store the id of the responsible person (idResponsable)
+                        cmd.Parameters.AddWithValue("@idResponsable", idResponsable);
+
+                        // Execute the stored procedure
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Solicitud aprobada successfully, return a success response or redirect to appropriate view
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (SqlException ex)
+            {
+                // Handle the SQL exception, return an error response or redirect to appropriate error view
+                return RedirectToAction("Error", "YourController", new { message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AprobSoli(int id)
+        {
+
+
+            try
+            {
+                ActionResult result = await AprobarSolicitud(id, 1);
+
+                await Task.Delay(1000); // Simulando una tarea asincrónica.
+
+                var successMessage = "Solicitud aprobada exitosamente.";
+                TempData["SuccessMessage"] = successMessage;
+
+                // Redirigir de vuelta a la vista Edit con un mensaje de éxito
+                // return Json(new { Success = true, Message = successMessage });
+                return View("/Views/Ver_Solicitudes/Index.cshtml");
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier error que ocurra durante la aprobación.
+                // Aquí puedes realizar un seguimiento de los errores o registrarlos para su posterior revisión.
+
+                // En caso de error, podemos devolver un código de estado HTTP 500 (Error interno del servidor).
+                var errorMessage = "Hubo un error al aprobar la solicitud.";
+                TempData["ErrorMessage"] = errorMessage;
+
+                // Redirigir de vuelta a la vista Edit con un mensaje de error
+                return RedirectToAction("Edit", new { id = id });
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
