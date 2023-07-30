@@ -28,6 +28,7 @@
             <th>Partida Origen</th>
             <th>Departamento Destino</th>
             <th>Partida Destino</th>
+            <th>Monto</th>
             <th>Estado Solicitud</th>
             <th>Acciones</th>
         </tr>
@@ -46,16 +47,12 @@
                     <td>@solicitud.Partida_Origen</td>
                     <td>@solicitud.Depto_Destino</td>
                     <td>@solicitud.Partida_Destino</td>
+                    <th>@solicitud.Monto</th>
                     <td>@solicitud.Estado_Solicitud</td>
                     <td>
-                        <!-- Botones con atributos data para almacenar los IDs -->
+                        <!-- Botones para aprobar y rechazar la solicitud -->
                         <input type="submit" name="submitBtn" value="Aprobar Solicitud" formaction="@Url.Action("AprobSoli", "Ver_Solicitudes", new { id = solicitud.ID })" class="btn btn-primary" />
-                        <button type="button" class="btn-rechazar" data-id="@solicitud.ID">Rechazar Solicitud</button>
-                        <div class="motivo-rechazo" style="display: none;">
-                            <label for="motivo-@solicitud.ID">Motivo del Rechazo:</label>
-                            <input type="text" id="motivo-@solicitud.ID" />
-                            <button type="button" class="btn-confirmar-rechazo" data-id="@solicitud.ID">Confirmar Rechazo</button>
-                        </div>
+                        <input type="submit" name="submitBtn" value="Rechazar Solicitud" formaction="@Url.Action("RechaSoli", "Ver_Solicitudes", new { id = solicitud.ID })" class="btn btn-primary" />
                     </td>
                 </tr>
             }
